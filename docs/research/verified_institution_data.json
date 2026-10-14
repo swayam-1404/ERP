@@ -1,0 +1,1900 @@
+{
+  "schema_version": 1,
+  "extracted_on": "2026-10-14",
+  "timezone": "Asia/Calcutta",
+  "status": "ACCEPTED_FOR_LOCAL_IMPLEMENTATION",
+  "verification_meaning": "VERIFIED_OFFICIAL means observed on an identified official publication; it does not prove currency, regulatory approval or authorization to grant ERP access.",
+  "group": {
+    "name": {
+      "value": "Vikash Higher Educational Institutions",
+      "source_id": "S001",
+      "source_url": "https://vheibargarh.in/",
+      "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "UNDATED",
+      "verification_status": "VERIFIED_OFFICIAL",
+      "academic_year": null
+    },
+    "campus": {
+      "value": "Vikash Knowledge Hub",
+      "source_id": "S001",
+      "source_url": "https://vheibargarh.in/",
+      "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "UNDATED",
+      "verification_status": "VERIFIED_OFFICIAL",
+      "academic_year": null
+    },
+    "published_address": {
+      "value": "Barahaguda Canal Chowk, Bargarh, Odisha - 768040",
+      "source_id": "S001",
+      "source_url": "https://vheibargarh.in/",
+      "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "UNDATED",
+      "verification_status": "VERIFIED_OFFICIAL",
+      "academic_year": null
+    },
+    "address_conflict": "VIT publishes 768028; preserve per-source values pending confirmation."
+  },
+  "institutions": [
+    {
+      "code": "VIT",
+      "name": {
+        "value": "Vikash Institute of Technology",
+        "source_id": "S001",
+        "source_url": "https://vheibargarh.in/",
+        "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "group_membership": {
+        "value": "Listed in VHEI higher-education directory",
+        "source_id": "S001",
+        "source_url": "https://vheibargarh.in/",
+        "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "website": {
+        "value": "https://vitbargarh.ac.in/",
+        "source_id": "S001",
+        "source_url": "https://vheibargarh.in/",
+        "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "seed_eligible": true,
+      "operational_activation": "REQUIRES_INSTITUTION_CONFIGURATION",
+      "departments": [
+        {
+          "value": "Computer Science & Engineering",
+          "source_id": "S005",
+          "source_url": "https://vitbargarh.ac.in/departments",
+          "source_title": "Academic Departments",
+          "extracted_on": "2026-10-14",
+          "publication_date": null,
+          "temporal_status": "UNDATED",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "academic_year": null
+        },
+        {
+          "value": "Electrical & Electronics Engineering",
+          "source_id": "S005",
+          "source_url": "https://vitbargarh.ac.in/departments",
+          "source_title": "Academic Departments",
+          "extracted_on": "2026-10-14",
+          "publication_date": null,
+          "temporal_status": "UNDATED",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "academic_year": null
+        },
+        {
+          "value": "Mechanical Engineering",
+          "source_id": "S005",
+          "source_url": "https://vitbargarh.ac.in/departments",
+          "source_title": "Academic Departments",
+          "extracted_on": "2026-10-14",
+          "publication_date": null,
+          "temporal_status": "UNDATED",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "academic_year": null
+        },
+        {
+          "value": "Civil Engineering",
+          "source_id": "S005",
+          "source_url": "https://vitbargarh.ac.in/departments",
+          "source_title": "Academic Departments",
+          "extracted_on": "2026-10-14",
+          "publication_date": null,
+          "temporal_status": "UNDATED",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "academic_year": null
+        },
+        {
+          "value": "Basic Science & Humanities",
+          "source_id": "S005",
+          "source_url": "https://vitbargarh.ac.in/departments",
+          "source_title": "Academic Departments",
+          "extracted_on": "2026-10-14",
+          "publication_date": null,
+          "temporal_status": "UNDATED",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "academic_year": null
+        },
+        {
+          "value": "MBA Department",
+          "source_id": "S005",
+          "source_url": "https://vitbargarh.ac.in/departments",
+          "source_title": "Academic Departments",
+          "extracted_on": "2026-10-14",
+          "publication_date": null,
+          "temporal_status": "UNDATED",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "academic_year": null
+        }
+      ],
+      "programmes": [
+        {
+          "name": {
+            "value": "B.Tech Computer Science & Engineering",
+            "source_id": "S004",
+            "source_url": "https://vitbargarh.ac.in/",
+            "source_title": "VIT Bargarh | Vikash Institute of Technology",
+            "extracted_on": "2026-10-14",
+            "publication_date": null,
+            "temporal_status": "UNDATED",
+            "verification_status": "VERIFIED_OFFICIAL",
+            "academic_year": null
+          },
+          "duration_years": {
+            "value": 4,
+            "source_id": "S004",
+            "source_url": "https://vitbargarh.ac.in/",
+            "source_title": "VIT Bargarh | Vikash Institute of Technology",
+            "extracted_on": "2026-10-14",
+            "publication_date": null,
+            "temporal_status": "UNDATED",
+            "verification_status": "VERIFIED_OFFICIAL",
+            "academic_year": null
+          },
+          "current_intake": null,
+          "academic_rule_version": null
+        },
+        {
+          "name": {
+            "value": "B.Tech Electrical & Electronics Engineering",
+            "source_id": "S004",
+            "source_url": "https://vitbargarh.ac.in/",
+            "source_title": "VIT Bargarh | Vikash Institute of Technology",
+            "extracted_on": "2026-10-14",
+            "publication_date": null,
+            "temporal_status": "UNDATED",
+            "verification_status": "VERIFIED_OFFICIAL",
+            "academic_year": null
+          },
+          "duration_years": {
+            "value": 4,
+            "source_id": "S004",
+            "source_url": "https://vitbargarh.ac.in/",
+            "source_title": "VIT Bargarh | Vikash Institute of Technology",
+            "extracted_on": "2026-10-14",
+            "publication_date": null,
+            "temporal_status": "UNDATED",
+            "verification_status": "VERIFIED_OFFICIAL",
+            "academic_year": null
+          },
+          "current_intake": null,
+          "academic_rule_version": null
+        },
+        {
+          "name": {
+            "value": "B.Tech Mechanical Engineering",
+            "source_id": "S004",
+            "source_url": "https://vitbargarh.ac.in/",
+            "source_title": "VIT Bargarh | Vikash Institute of Technology",
+            "extracted_on": "2026-10-14",
+            "publication_date": null,
+            "temporal_status": "UNDATED",
+            "verification_status": "VERIFIED_OFFICIAL",
+            "academic_year": null
+          },
+          "duration_years": {
+            "value": 4,
+            "source_id": "S004",
+            "source_url": "https://vitbargarh.ac.in/",
+            "source_title": "VIT Bargarh | Vikash Institute of Technology",
+            "extracted_on": "2026-10-14",
+            "publication_date": null,
+            "temporal_status": "UNDATED",
+            "verification_status": "VERIFIED_OFFICIAL",
+            "academic_year": null
+          },
+          "current_intake": null,
+          "academic_rule_version": null
+        },
+        {
+          "name": {
+            "value": "B.Tech Civil Engineering",
+            "source_id": "S004",
+            "source_url": "https://vitbargarh.ac.in/",
+            "source_title": "VIT Bargarh | Vikash Institute of Technology",
+            "extracted_on": "2026-10-14",
+            "publication_date": null,
+            "temporal_status": "UNDATED",
+            "verification_status": "VERIFIED_OFFICIAL",
+            "academic_year": null
+          },
+          "duration_years": {
+            "value": 4,
+            "source_id": "S004",
+            "source_url": "https://vitbargarh.ac.in/",
+            "source_title": "VIT Bargarh | Vikash Institute of Technology",
+            "extracted_on": "2026-10-14",
+            "publication_date": null,
+            "temporal_status": "UNDATED",
+            "verification_status": "VERIFIED_OFFICIAL",
+            "academic_year": null
+          },
+          "current_intake": null,
+          "academic_rule_version": null
+        },
+        {
+          "name": {
+            "value": "Master of Business Administration",
+            "source_id": "S004",
+            "source_url": "https://vitbargarh.ac.in/",
+            "source_title": "VIT Bargarh | Vikash Institute of Technology",
+            "extracted_on": "2026-10-14",
+            "publication_date": null,
+            "temporal_status": "UNDATED",
+            "verification_status": "VERIFIED_OFFICIAL",
+            "academic_year": null
+          },
+          "duration_years": {
+            "value": 2,
+            "source_id": "S004",
+            "source_url": "https://vitbargarh.ac.in/",
+            "source_title": "VIT Bargarh | Vikash Institute of Technology",
+            "extracted_on": "2026-10-14",
+            "publication_date": null,
+            "temporal_status": "UNDATED",
+            "verification_status": "VERIFIED_OFFICIAL",
+            "academic_year": null
+          },
+          "current_intake": null,
+          "academic_rule_version": null
+        }
+      ],
+      "contact": {
+        "address": {
+          "value": "Vikash Knowledge Hub, Barahaguda Canal Chowk, NH-6, Bargarh – 768028, Odisha",
+          "source_id": "S004",
+          "source_url": "https://vitbargarh.ac.in/",
+          "source_title": "VIT Bargarh | Vikash Institute of Technology",
+          "extracted_on": "2026-10-14",
+          "publication_date": null,
+          "temporal_status": "UNDATED",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "academic_year": null
+        },
+        "phone": {
+          "value": "+91-7064413438",
+          "source_id": "S004",
+          "source_url": "https://vitbargarh.ac.in/",
+          "source_title": "VIT Bargarh | Vikash Institute of Technology",
+          "extracted_on": "2026-10-14",
+          "publication_date": null,
+          "temporal_status": "UNDATED",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "academic_year": null
+        },
+        "email": {
+          "value": "info@vitbargarh.ac.in",
+          "source_id": "S004",
+          "source_url": "https://vitbargarh.ac.in/",
+          "source_title": "VIT Bargarh | Vikash Institute of Technology",
+          "extracted_on": "2026-10-14",
+          "publication_date": null,
+          "temporal_status": "UNDATED",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "academic_year": null
+        }
+      }
+    },
+    {
+      "code": "VDC",
+      "name": {
+        "value": "Vikash Degree College",
+        "source_id": "S001",
+        "source_url": "https://vheibargarh.in/",
+        "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "group_membership": {
+        "value": "Listed in VHEI higher-education directory",
+        "source_id": "S001",
+        "source_url": "https://vheibargarh.in/",
+        "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "website": {
+        "value": "https://vdcbargarh.ac.in/",
+        "source_id": "S001",
+        "source_url": "https://vheibargarh.in/",
+        "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "seed_eligible": true,
+      "operational_activation": "REQUIRES_INSTITUTION_CONFIGURATION",
+      "departments": [
+        {
+          "value": "Economics",
+          "source_id": "S011",
+          "source_url": "https://vdcbargarh.ac.in/",
+          "source_title": "Vikash Degree College, Bargarh.",
+          "extracted_on": "2026-10-14",
+          "publication_date": null,
+          "temporal_status": "UNDATED",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "academic_year": null,
+          "evidence_scope": "Published navigation label; current offering needs confirmation"
+        },
+        {
+          "value": "Education",
+          "source_id": "S011",
+          "source_url": "https://vdcbargarh.ac.in/",
+          "source_title": "Vikash Degree College, Bargarh.",
+          "extracted_on": "2026-10-14",
+          "publication_date": null,
+          "temporal_status": "UNDATED",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "academic_year": null,
+          "evidence_scope": "Published navigation label; current offering needs confirmation"
+        },
+        {
+          "value": "English",
+          "source_id": "S011",
+          "source_url": "https://vdcbargarh.ac.in/",
+          "source_title": "Vikash Degree College, Bargarh.",
+          "extracted_on": "2026-10-14",
+          "publication_date": null,
+          "temporal_status": "UNDATED",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "academic_year": null,
+          "evidence_scope": "Published navigation label; current offering needs confirmation"
+        },
+        {
+          "value": "Political Science",
+          "source_id": "S011",
+          "source_url": "https://vdcbargarh.ac.in/",
+          "source_title": "Vikash Degree College, Bargarh.",
+          "extracted_on": "2026-10-14",
+          "publication_date": null,
+          "temporal_status": "UNDATED",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "academic_year": null,
+          "evidence_scope": "Published navigation label; current offering needs confirmation"
+        },
+        {
+          "value": "Psychology",
+          "source_id": "S011",
+          "source_url": "https://vdcbargarh.ac.in/",
+          "source_title": "Vikash Degree College, Bargarh.",
+          "extracted_on": "2026-10-14",
+          "publication_date": null,
+          "temporal_status": "UNDATED",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "academic_year": null,
+          "evidence_scope": "Published navigation label; current offering needs confirmation"
+        },
+        {
+          "value": "Accountancy",
+          "source_id": "S011",
+          "source_url": "https://vdcbargarh.ac.in/",
+          "source_title": "Vikash Degree College, Bargarh.",
+          "extracted_on": "2026-10-14",
+          "publication_date": null,
+          "temporal_status": "UNDATED",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "academic_year": null,
+          "evidence_scope": "Published navigation label; current offering needs confirmation"
+        },
+        {
+          "value": "Computer Science",
+          "source_id": "S011",
+          "source_url": "https://vdcbargarh.ac.in/",
+          "source_title": "Vikash Degree College, Bargarh.",
+          "extracted_on": "2026-10-14",
+          "publication_date": null,
+          "temporal_status": "UNDATED",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "academic_year": null,
+          "evidence_scope": "Published navigation label; current offering needs confirmation"
+        },
+        {
+          "value": "Chemistry",
+          "source_id": "S011",
+          "source_url": "https://vdcbargarh.ac.in/",
+          "source_title": "Vikash Degree College, Bargarh.",
+          "extracted_on": "2026-10-14",
+          "publication_date": null,
+          "temporal_status": "UNDATED",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "academic_year": null,
+          "evidence_scope": "Published navigation label; current offering needs confirmation"
+        },
+        {
+          "value": "Mathematics",
+          "source_id": "S011",
+          "source_url": "https://vdcbargarh.ac.in/",
+          "source_title": "Vikash Degree College, Bargarh.",
+          "extracted_on": "2026-10-14",
+          "publication_date": null,
+          "temporal_status": "UNDATED",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "academic_year": null,
+          "evidence_scope": "Published navigation label; current offering needs confirmation"
+        },
+        {
+          "value": "Physics",
+          "source_id": "S011",
+          "source_url": "https://vdcbargarh.ac.in/",
+          "source_title": "Vikash Degree College, Bargarh.",
+          "extracted_on": "2026-10-14",
+          "publication_date": null,
+          "temporal_status": "UNDATED",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "academic_year": null,
+          "evidence_scope": "Published navigation label; current offering needs confirmation"
+        },
+        {
+          "value": "Botany",
+          "source_id": "S011",
+          "source_url": "https://vdcbargarh.ac.in/",
+          "source_title": "Vikash Degree College, Bargarh.",
+          "extracted_on": "2026-10-14",
+          "publication_date": null,
+          "temporal_status": "UNDATED",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "academic_year": null,
+          "evidence_scope": "Published navigation label; current offering needs confirmation"
+        },
+        {
+          "value": "Zoology",
+          "source_id": "S011",
+          "source_url": "https://vdcbargarh.ac.in/",
+          "source_title": "Vikash Degree College, Bargarh.",
+          "extracted_on": "2026-10-14",
+          "publication_date": null,
+          "temporal_status": "UNDATED",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "academic_year": null,
+          "evidence_scope": "Published navigation label; current offering needs confirmation"
+        }
+      ],
+      "programmes": [
+        {
+          "name": {
+            "value": "+3 Arts",
+            "source_id": "S011",
+            "source_url": "https://vdcbargarh.ac.in/",
+            "source_title": "Vikash Degree College, Bargarh.",
+            "extracted_on": "2026-10-14",
+            "publication_date": null,
+            "temporal_status": "UNDATED",
+            "verification_status": "VERIFIED_OFFICIAL",
+            "academic_year": null,
+            "evidence_scope": "Advertised navigation/directory; detail page unavailable"
+          },
+          "duration_years": null,
+          "current_intake": null,
+          "academic_rule_version": null
+        },
+        {
+          "name": {
+            "value": "+3 Science",
+            "source_id": "S011",
+            "source_url": "https://vdcbargarh.ac.in/",
+            "source_title": "Vikash Degree College, Bargarh.",
+            "extracted_on": "2026-10-14",
+            "publication_date": null,
+            "temporal_status": "UNDATED",
+            "verification_status": "VERIFIED_OFFICIAL",
+            "academic_year": null,
+            "evidence_scope": "Advertised navigation/directory; detail page unavailable"
+          },
+          "duration_years": null,
+          "current_intake": null,
+          "academic_rule_version": null
+        },
+        {
+          "name": {
+            "value": "+3 Commerce",
+            "source_id": "S011",
+            "source_url": "https://vdcbargarh.ac.in/",
+            "source_title": "Vikash Degree College, Bargarh.",
+            "extracted_on": "2026-10-14",
+            "publication_date": null,
+            "temporal_status": "UNDATED",
+            "verification_status": "VERIFIED_OFFICIAL",
+            "academic_year": null,
+            "evidence_scope": "Advertised navigation/directory; detail page unavailable"
+          },
+          "duration_years": null,
+          "current_intake": null,
+          "academic_rule_version": null
+        },
+        {
+          "name": {
+            "value": "M.A (English)",
+            "source_id": "S011",
+            "source_url": "https://vdcbargarh.ac.in/",
+            "source_title": "Vikash Degree College, Bargarh.",
+            "extracted_on": "2026-10-14",
+            "publication_date": null,
+            "temporal_status": "UNDATED",
+            "verification_status": "VERIFIED_OFFICIAL",
+            "academic_year": null,
+            "evidence_scope": "Advertised navigation/directory; detail page unavailable"
+          },
+          "duration_years": null,
+          "current_intake": null,
+          "academic_rule_version": null
+        },
+        {
+          "name": {
+            "value": "M.Sc (Chemistry)",
+            "source_id": "S011",
+            "source_url": "https://vdcbargarh.ac.in/",
+            "source_title": "Vikash Degree College, Bargarh.",
+            "extracted_on": "2026-10-14",
+            "publication_date": null,
+            "temporal_status": "UNDATED",
+            "verification_status": "VERIFIED_OFFICIAL",
+            "academic_year": null,
+            "evidence_scope": "Advertised navigation/directory; detail page unavailable"
+          },
+          "duration_years": null,
+          "current_intake": null,
+          "academic_rule_version": null
+        },
+        {
+          "name": {
+            "value": "M.Com",
+            "source_id": "S011",
+            "source_url": "https://vdcbargarh.ac.in/",
+            "source_title": "Vikash Degree College, Bargarh.",
+            "extracted_on": "2026-10-14",
+            "publication_date": null,
+            "temporal_status": "UNDATED",
+            "verification_status": "VERIFIED_OFFICIAL",
+            "academic_year": null,
+            "evidence_scope": "Advertised navigation/directory; detail page unavailable"
+          },
+          "duration_years": null,
+          "current_intake": null,
+          "academic_rule_version": null
+        }
+      ],
+      "contact": {
+        "address": {
+          "value": "Vikash Educational Institutions, Barahaguda Canal Chowk.",
+          "source_id": "S014",
+          "source_url": "https://vdcbargarh.ac.in/home/contact",
+          "source_title": "Contact Us",
+          "extracted_on": "2026-10-14",
+          "publication_date": null,
+          "temporal_status": "UNDATED",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "academic_year": null
+        },
+        "phone": {
+          "value": "+91 706-441-3431",
+          "source_id": "S014",
+          "source_url": "https://vdcbargarh.ac.in/home/contact",
+          "source_title": "Contact Us",
+          "extracted_on": "2026-10-14",
+          "publication_date": null,
+          "temporal_status": "UNDATED",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "academic_year": null
+        },
+        "email": {
+          "value": "principalvdc1@gmail.com",
+          "source_id": "S014",
+          "source_url": "https://vdcbargarh.ac.in/home/contact",
+          "source_title": "Contact Us",
+          "extracted_on": "2026-10-14",
+          "publication_date": null,
+          "temporal_status": "UNDATED",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "academic_year": null
+        }
+      }
+    },
+    {
+      "code": "VSBM",
+      "name": {
+        "value": "Vikash School of Business Management",
+        "source_id": "S001",
+        "source_url": "https://vheibargarh.in/",
+        "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "group_membership": {
+        "value": "Listed in VHEI higher-education directory",
+        "source_id": "S001",
+        "source_url": "https://vheibargarh.in/",
+        "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "website": {
+        "value": "https://vsbm.vheibargarh.in/",
+        "source_id": "S001",
+        "source_url": "https://vheibargarh.in/",
+        "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "seed_eligible": true,
+      "operational_activation": "REQUIRES_INSTITUTION_CONFIGURATION",
+      "programmes": [
+        {
+          "name": {
+            "value": "BBA",
+            "source_id": "S001",
+            "source_url": "https://vheibargarh.in/",
+            "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+            "extracted_on": "2026-10-14",
+            "publication_date": null,
+            "temporal_status": "UNDATED",
+            "verification_status": "VERIFIED_OFFICIAL",
+            "academic_year": null,
+            "evidence_scope": "VHEI directory advertisement only; current approval unconfirmed"
+          },
+          "duration_years": null,
+          "current_intake": null,
+          "academic_rule_version": null
+        },
+        {
+          "name": {
+            "value": "BCA",
+            "source_id": "S001",
+            "source_url": "https://vheibargarh.in/",
+            "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+            "extracted_on": "2026-10-14",
+            "publication_date": null,
+            "temporal_status": "UNDATED",
+            "verification_status": "VERIFIED_OFFICIAL",
+            "academic_year": null,
+            "evidence_scope": "VHEI directory advertisement only; current approval unconfirmed"
+          },
+          "duration_years": null,
+          "current_intake": null,
+          "academic_rule_version": null
+        }
+      ]
+    },
+    {
+      "code": "VPT",
+      "name": {
+        "value": "Vikash Polytechnic",
+        "source_id": "S001",
+        "source_url": "https://vheibargarh.in/",
+        "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "group_membership": {
+        "value": "Listed in VHEI higher-education directory",
+        "source_id": "S001",
+        "source_url": "https://vheibargarh.in/",
+        "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "website": {
+        "value": "https://vpt.vheibargarh.in/",
+        "source_id": "S001",
+        "source_url": "https://vheibargarh.in/",
+        "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "seed_eligible": true,
+      "operational_activation": "REQUIRES_INSTITUTION_CONFIGURATION",
+      "programmes": [
+        {
+          "name": {
+            "value": "Diploma Civil Engineering",
+            "source_id": "S001",
+            "source_url": "https://vheibargarh.in/",
+            "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+            "extracted_on": "2026-10-14",
+            "publication_date": null,
+            "temporal_status": "UNDATED",
+            "verification_status": "VERIFIED_OFFICIAL",
+            "academic_year": null,
+            "evidence_scope": "VHEI directory advertisement only; current approval unconfirmed"
+          },
+          "duration_years": null,
+          "current_intake": null,
+          "academic_rule_version": null
+        },
+        {
+          "name": {
+            "value": "Diploma Mechanical Engineering",
+            "source_id": "S001",
+            "source_url": "https://vheibargarh.in/",
+            "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+            "extracted_on": "2026-10-14",
+            "publication_date": null,
+            "temporal_status": "UNDATED",
+            "verification_status": "VERIFIED_OFFICIAL",
+            "academic_year": null,
+            "evidence_scope": "VHEI directory advertisement only; current approval unconfirmed"
+          },
+          "duration_years": null,
+          "current_intake": null,
+          "academic_rule_version": null
+        },
+        {
+          "name": {
+            "value": "Diploma Electrical Engineering",
+            "source_id": "S001",
+            "source_url": "https://vheibargarh.in/",
+            "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+            "extracted_on": "2026-10-14",
+            "publication_date": null,
+            "temporal_status": "UNDATED",
+            "verification_status": "VERIFIED_OFFICIAL",
+            "academic_year": null,
+            "evidence_scope": "VHEI directory advertisement only; current approval unconfirmed"
+          },
+          "duration_years": null,
+          "current_intake": null,
+          "academic_rule_version": null
+        },
+        {
+          "name": {
+            "value": "Diploma Computer Science",
+            "source_id": "S001",
+            "source_url": "https://vheibargarh.in/",
+            "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+            "extracted_on": "2026-10-14",
+            "publication_date": null,
+            "temporal_status": "UNDATED",
+            "verification_status": "VERIFIED_OFFICIAL",
+            "academic_year": null,
+            "evidence_scope": "VHEI directory advertisement only; current approval unconfirmed"
+          },
+          "duration_years": null,
+          "current_intake": null,
+          "academic_rule_version": null
+        },
+        {
+          "name": {
+            "value": "Diploma Electronics & Communication Engineering",
+            "source_id": "S001",
+            "source_url": "https://vheibargarh.in/",
+            "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+            "extracted_on": "2026-10-14",
+            "publication_date": null,
+            "temporal_status": "UNDATED",
+            "verification_status": "VERIFIED_OFFICIAL",
+            "academic_year": null,
+            "evidence_scope": "VHEI directory advertisement only; current approval unconfirmed"
+          },
+          "duration_years": null,
+          "current_intake": null,
+          "academic_rule_version": null
+        }
+      ]
+    },
+    {
+      "code": "VLS",
+      "name": {
+        "value": "Vikash Law School",
+        "source_id": "S001",
+        "source_url": "https://vheibargarh.in/",
+        "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "group_membership": {
+        "value": "Listed in VHEI higher-education directory",
+        "source_id": "S001",
+        "source_url": "https://vheibargarh.in/",
+        "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "website": {
+        "value": "https://vls.vheibargarh.in/",
+        "source_id": "S001",
+        "source_url": "https://vheibargarh.in/",
+        "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "seed_eligible": true,
+      "operational_activation": "REQUIRES_INSTITUTION_CONFIGURATION",
+      "programmes": [
+        {
+          "name": {
+            "value": "B.A. LL.B. (5-Year Integrated Honours)",
+            "source_id": "S001",
+            "source_url": "https://vheibargarh.in/",
+            "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+            "extracted_on": "2026-10-14",
+            "publication_date": null,
+            "temporal_status": "UNDATED",
+            "verification_status": "VERIFIED_OFFICIAL",
+            "academic_year": null,
+            "evidence_scope": "VHEI directory advertisement only; current approval unconfirmed"
+          },
+          "duration_years": null,
+          "current_intake": null,
+          "academic_rule_version": null
+        }
+      ]
+    },
+    {
+      "code": "VNC",
+      "name": {
+        "value": "Vikash Nursing College",
+        "source_id": "S001",
+        "source_url": "https://vheibargarh.in/",
+        "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "group_membership": {
+        "value": "Listed in VHEI higher-education directory",
+        "source_id": "S001",
+        "source_url": "https://vheibargarh.in/",
+        "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "website": {
+        "value": "https://vnc.vheibargarh.in/",
+        "source_id": "S001",
+        "source_url": "https://vheibargarh.in/",
+        "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "seed_eligible": true,
+      "operational_activation": "REQUIRES_INSTITUTION_CONFIGURATION",
+      "programmes": [
+        {
+          "name": {
+            "value": "B.Sc. Nursing",
+            "source_id": "S001",
+            "source_url": "https://vheibargarh.in/",
+            "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+            "extracted_on": "2026-10-14",
+            "publication_date": null,
+            "temporal_status": "UNDATED",
+            "verification_status": "VERIFIED_OFFICIAL",
+            "academic_year": null,
+            "evidence_scope": "VHEI directory advertisement only; current approval unconfirmed"
+          },
+          "duration_years": null,
+          "current_intake": null,
+          "academic_rule_version": null
+        },
+        {
+          "name": {
+            "value": "ANM",
+            "source_id": "S001",
+            "source_url": "https://vheibargarh.in/",
+            "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+            "extracted_on": "2026-10-14",
+            "publication_date": null,
+            "temporal_status": "UNDATED",
+            "verification_status": "VERIFIED_OFFICIAL",
+            "academic_year": null,
+            "evidence_scope": "VHEI directory advertisement only; current approval unconfirmed"
+          },
+          "duration_years": null,
+          "current_intake": null,
+          "academic_rule_version": null
+        }
+      ]
+    },
+    {
+      "code": "VPC",
+      "name": {
+        "value": "Vikash Pharmacy College",
+        "source_id": "S001",
+        "source_url": "https://vheibargarh.in/",
+        "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "group_membership": {
+        "value": "Listed in VHEI higher-education directory",
+        "source_id": "S001",
+        "source_url": "https://vheibargarh.in/",
+        "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "website": {
+        "value": "https://vpc.vheibargarh.in/",
+        "source_id": "S001",
+        "source_url": "https://vheibargarh.in/",
+        "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "seed_eligible": true,
+      "operational_activation": "REQUIRES_INSTITUTION_CONFIGURATION",
+      "programmes": [
+        {
+          "name": {
+            "value": "B.Pharm",
+            "source_id": "S001",
+            "source_url": "https://vheibargarh.in/",
+            "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+            "extracted_on": "2026-10-14",
+            "publication_date": null,
+            "temporal_status": "UNDATED",
+            "verification_status": "VERIFIED_OFFICIAL",
+            "academic_year": null,
+            "evidence_scope": "VHEI directory advertisement only; current approval unconfirmed"
+          },
+          "duration_years": null,
+          "current_intake": null,
+          "academic_rule_version": null
+        },
+        {
+          "name": {
+            "value": "D.Pharm",
+            "source_id": "S001",
+            "source_url": "https://vheibargarh.in/",
+            "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+            "extracted_on": "2026-10-14",
+            "publication_date": null,
+            "temporal_status": "UNDATED",
+            "verification_status": "VERIFIED_OFFICIAL",
+            "academic_year": null,
+            "evidence_scope": "VHEI directory advertisement only; current approval unconfirmed"
+          },
+          "duration_years": null,
+          "current_intake": null,
+          "academic_rule_version": null
+        }
+      ]
+    },
+    {
+      "code": "VCPS",
+      "name": {
+        "value": "Vikash College of Paramedical Sciences",
+        "source_id": "S001",
+        "source_url": "https://vheibargarh.in/",
+        "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "group_membership": {
+        "value": "Listed in VHEI higher-education directory",
+        "source_id": "S001",
+        "source_url": "https://vheibargarh.in/",
+        "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "website": {
+        "value": null,
+        "source_id": "S001",
+        "source_url": "https://vheibargarh.in/",
+        "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "seed_eligible": true,
+      "operational_activation": "REQUIRES_INSTITUTION_CONFIGURATION",
+      "programmes": [
+        {
+          "name": {
+            "value": "BMLT",
+            "source_id": "S001",
+            "source_url": "https://vheibargarh.in/",
+            "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+            "extracted_on": "2026-10-14",
+            "publication_date": null,
+            "temporal_status": "UNDATED",
+            "verification_status": "VERIFIED_OFFICIAL",
+            "academic_year": null,
+            "evidence_scope": "VHEI directory advertisement only; current approval unconfirmed"
+          },
+          "duration_years": null,
+          "current_intake": null,
+          "academic_rule_version": null
+        },
+        {
+          "name": {
+            "value": "DMRT",
+            "source_id": "S001",
+            "source_url": "https://vheibargarh.in/",
+            "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+            "extracted_on": "2026-10-14",
+            "publication_date": null,
+            "temporal_status": "UNDATED",
+            "verification_status": "VERIFIED_OFFICIAL",
+            "academic_year": null,
+            "evidence_scope": "VHEI directory advertisement only; current approval unconfirmed"
+          },
+          "duration_years": null,
+          "current_intake": null,
+          "academic_rule_version": null
+        },
+        {
+          "name": {
+            "value": "DMLT",
+            "source_id": "S001",
+            "source_url": "https://vheibargarh.in/",
+            "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+            "extracted_on": "2026-10-14",
+            "publication_date": null,
+            "temporal_status": "UNDATED",
+            "verification_status": "VERIFIED_OFFICIAL",
+            "academic_year": null,
+            "evidence_scope": "VHEI directory advertisement only; current approval unconfirmed"
+          },
+          "duration_years": null,
+          "current_intake": null,
+          "academic_rule_version": null
+        },
+        {
+          "name": {
+            "value": "OTT",
+            "source_id": "S001",
+            "source_url": "https://vheibargarh.in/",
+            "source_title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+            "extracted_on": "2026-10-14",
+            "publication_date": null,
+            "temporal_status": "UNDATED",
+            "verification_status": "VERIFIED_OFFICIAL",
+            "academic_year": null,
+            "evidence_scope": "VHEI directory advertisement only; current approval unconfirmed"
+          },
+          "duration_years": null,
+          "current_intake": null,
+          "academic_rule_version": null
+        }
+      ]
+    }
+  ],
+  "candidate_institutions": [
+    {
+      "code": "VHSS",
+      "name": {
+        "value": "Vikash Higher Secondary School, Bargarh",
+        "source_id": "S030",
+        "source_url": "https://vhssbgh.krishnavikash.com/Home/About",
+        "source_title": "About - Vikash Higher Secondary School, Bargarh",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "website": {
+        "value": "https://vhssbgh.krishnavikash.com/",
+        "source_id": "S030",
+        "source_url": "https://vhssbgh.krishnavikash.com/Home/About",
+        "source_title": "About - Vikash Higher Secondary School, Bargarh",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "streams": [
+        {
+          "value": "Science",
+          "source_id": "S031",
+          "source_url": "https://vhssbgh.krishnavikash.com/Home/Academics",
+          "source_title": "Academics - Vikash Higher Secondary School, Bargarh",
+          "extracted_on": "2026-10-14",
+          "publication_date": null,
+          "temporal_status": "UNDATED",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "academic_year": null
+        },
+        {
+          "value": "Commerce",
+          "source_id": "S031",
+          "source_url": "https://vhssbgh.krishnavikash.com/Home/Academics",
+          "source_title": "Academics - Vikash Higher Secondary School, Bargarh",
+          "extracted_on": "2026-10-14",
+          "publication_date": null,
+          "temporal_status": "UNDATED",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "academic_year": null
+        }
+      ],
+      "group_membership": {
+        "value": null,
+        "verification_status": "UNVERIFIED",
+        "reason": "Own site uses Krishna Vikash identity; no link from VHEI directory observed."
+      },
+      "seed_eligible": false
+    }
+  ],
+  "public_role_references": [
+    {
+      "institution": "VIT",
+      "name": {
+        "value": "Sri D. Nageswar Rao",
+        "source_id": "S004",
+        "source_url": "https://vitbargarh.ac.in/",
+        "source_title": "VIT Bargarh | Vikash Institute of Technology",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "role": {
+        "value": "Chairman",
+        "source_id": "S004",
+        "source_url": "https://vitbargarh.ac.in/",
+        "source_title": "VIT Bargarh | Vikash Institute of Technology",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "seed_eligible": false,
+      "note": "Public role reference only; not a verified current employment record or login authorization."
+    },
+    {
+      "institution": "VIT",
+      "name": {
+        "value": "Prof. A K Mohapatra",
+        "source_id": "S004",
+        "source_url": "https://vitbargarh.ac.in/",
+        "source_title": "VIT Bargarh | Vikash Institute of Technology",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "role": {
+        "value": "Chief Administrative Officer",
+        "source_id": "S004",
+        "source_url": "https://vitbargarh.ac.in/",
+        "source_title": "VIT Bargarh | Vikash Institute of Technology",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "seed_eligible": false,
+      "note": "Public role reference only; not a verified current employment record or login authorization."
+    },
+    {
+      "institution": "VIT",
+      "name": {
+        "value": "Dr. Purnendu Mishra",
+        "source_id": "S004",
+        "source_url": "https://vitbargarh.ac.in/",
+        "source_title": "VIT Bargarh | Vikash Institute of Technology",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "role": {
+        "value": "Principal",
+        "source_id": "S004",
+        "source_url": "https://vitbargarh.ac.in/",
+        "source_title": "VIT Bargarh | Vikash Institute of Technology",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "seed_eligible": false,
+      "note": "Public role reference only; not a verified current employment record or login authorization."
+    },
+    {
+      "institution": "VDC",
+      "name": {
+        "value": "Shri Satyabrata Mishra",
+        "source_id": "S013",
+        "source_url": "https://vdcbargarh.ac.in/home/teaching",
+        "source_title": "Teaching Staff",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "role": {
+        "value": "Principal",
+        "source_id": "S013",
+        "source_url": "https://vdcbargarh.ac.in/home/teaching",
+        "source_title": "Teaching Staff",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "seed_eligible": false,
+      "note": "Public role reference only; not a verified current employment record or login authorization."
+    },
+    {
+      "institution": "VDC",
+      "name": {
+        "value": "Mr. R.S.V. Krishna",
+        "source_id": "S013",
+        "source_url": "https://vdcbargarh.ac.in/home/teaching",
+        "source_title": "Teaching Staff",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "role": {
+        "value": "Vice Principal",
+        "source_id": "S013",
+        "source_url": "https://vdcbargarh.ac.in/home/teaching",
+        "source_title": "Teaching Staff",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "seed_eligible": false,
+      "note": "Public role reference only; not a verified current employment record or login authorization."
+    },
+    {
+      "institution": "VDC",
+      "name": {
+        "value": "Mr.Debashish Rath",
+        "source_id": "S013",
+        "source_url": "https://vdcbargarh.ac.in/home/teaching",
+        "source_title": "Teaching Staff",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "role": {
+        "value": "Lecturer & Exam Cell Incharge",
+        "source_id": "S013",
+        "source_url": "https://vdcbargarh.ac.in/home/teaching",
+        "source_title": "Teaching Staff",
+        "extracted_on": "2026-10-14",
+        "publication_date": null,
+        "temporal_status": "UNDATED",
+        "verification_status": "VERIFIED_OFFICIAL",
+        "academic_year": null
+      },
+      "seed_eligible": false,
+      "note": "Public role reference only; not a verified current employment record or login authorization."
+    }
+  ],
+  "official_fee_structures": [],
+  "verified_grading_rules": [],
+  "certificate_issuance_authorities": [],
+  "sources": [
+    {
+      "id": "S001",
+      "institution": "VHEI",
+      "category": "Directory, campus, programmes, leadership",
+      "url": "https://vheibargarh.in/",
+      "title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "UNDATED",
+      "verification_status": "VERIFIED_OFFICIAL",
+      "academic_year": null,
+      "method": "HTTP + rendered browser",
+      "outcome": "Accessible; JavaScript required",
+      "notes": "Eight named institutions; directory is institutional self-publication, not a regulator approval register."
+    },
+    {
+      "id": "S002",
+      "institution": "VHEI",
+      "category": "Admissions",
+      "url": "https://vheibargarh.in/admissions",
+      "title": "Admissions 2026-27",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "CURRENT",
+      "verification_status": "VERIFIED_OFFICIAL",
+      "academic_year": "2026-27",
+      "method": "Rendered browser",
+      "outcome": "Accessible",
+      "notes": "Enquiry, counselling and verification flow; no enquiry submitted."
+    },
+    {
+      "id": "S003",
+      "institution": "VHEI",
+      "category": "Crawler policy",
+      "url": "https://vheibargarh.in/robots.txt",
+      "title": "robots.txt request",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "UNDATED",
+      "verification_status": "UNVERIFIED",
+      "academic_year": null,
+      "method": "Web tool + HTTP retry",
+      "outcome": "HTTP 200 HTML fallback",
+      "notes": "Not a valid robots file. Web tool initially failed. No bulk crawl or authentication bypass. "
+    },
+    {
+      "id": "S004",
+      "institution": "VIT",
+      "category": "Programmes, leadership, facilities, contact",
+      "url": "https://vitbargarh.ac.in/",
+      "title": "VIT Bargarh | Vikash Institute of Technology",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "UNDATED",
+      "verification_status": "VERIFIED_OFFICIAL",
+      "academic_year": null,
+      "method": "HTTP + rendered browser",
+      "outcome": "Accessible; JavaScript required",
+      "notes": "Institutional claims of AICTE/BPUT; current approval letters not validated."
+    },
+    {
+      "id": "S005",
+      "institution": "VIT",
+      "category": "Departments and HODs",
+      "url": "https://vitbargarh.ac.in/departments",
+      "title": "Academic Departments",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "UNDATED",
+      "verification_status": "VERIFIED_OFFICIAL",
+      "academic_year": null,
+      "method": "Rendered browser",
+      "outcome": "Accessible",
+      "notes": "Six departments published; statistics excluded from operational seeds."
+    },
+    {
+      "id": "S006",
+      "institution": "VIT",
+      "category": "Calendar and examination form references",
+      "url": "https://vitbargarh.ac.in/academics/academic-calendar",
+      "title": "Academic Calendar",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "CURRENT",
+      "verification_status": "VERIFIED_OFFICIAL",
+      "academic_year": "2026-27",
+      "method": "Rendered browser",
+      "outcome": "Accessible",
+      "notes": "2026-27 link leads to notices; prior calendars and forms linked. Dates and rules not transcribed."
+    },
+    {
+      "id": "S007",
+      "institution": "VIT",
+      "category": "Approval disclosure",
+      "url": "https://vitbargarh.ac.in/documents/Mandatory-Disclosure-2025.pdf",
+      "title": "Mandatory Disclosure 2025 (link label)",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "HISTORICAL",
+      "verification_status": "UNVERIFIED",
+      "academic_year": "2025",
+      "method": "Web tool + HTTP retry",
+      "outcome": "HTTP 200 application/pdf; 1581881 bytes",
+      "notes": "Web tool failed; HTTP retry confirmed availability only. PDF contents NOT inspected."
+    },
+    {
+      "id": "S008",
+      "institution": "VIT",
+      "category": "Historical calendar",
+      "url": "https://vitbargarh.ac.in/documents/Academic-Calendar-Odd-2025-26.pdf",
+      "title": "Academic Calendar Odd 2025-26 (link label)",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "HISTORICAL",
+      "verification_status": "UNVERIFIED",
+      "academic_year": "2025-26",
+      "method": "HTTP",
+      "outcome": "HTTP 200 application/pdf; 44860 bytes",
+      "notes": "Availability only; PDF contents NOT inspected."
+    },
+    {
+      "id": "S009",
+      "institution": "VIT",
+      "category": "Exam form",
+      "url": "https://vitbargarh.ac.in/documents/Exam-Registration-Form.pdf",
+      "title": "Examination Registration Form (link label)",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "UNDATED",
+      "verification_status": "UNVERIFIED",
+      "academic_year": null,
+      "method": "HTTP",
+      "outcome": "HTTP 200 application/pdf; 1312606 bytes",
+      "notes": "Availability only; PDF contents NOT inspected."
+    },
+    {
+      "id": "S010",
+      "institution": "VIT",
+      "category": "Crawler policy",
+      "url": "https://vitbargarh.ac.in/robots.txt",
+      "title": "robots.txt request",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "UNDATED",
+      "verification_status": "UNVERIFIED",
+      "academic_year": null,
+      "method": "HTTP",
+      "outcome": "HTTP 200 HTML fallback",
+      "notes": "No valid robots directives observed."
+    },
+    {
+      "id": "S011",
+      "institution": "VDC",
+      "category": "Institution, departments, programmes, historical notices",
+      "url": "https://vdcbargarh.ac.in/",
+      "title": "Vikash Degree College, Bargarh.",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "UNDATED",
+      "verification_status": "VERIFIED_OFFICIAL",
+      "academic_year": null,
+      "method": "Web reader",
+      "outcome": "Accessible",
+      "notes": "Navigation labels retained as advertised offerings, not current sanctioned intake."
+    },
+    {
+      "id": "S012",
+      "institution": "VDC",
+      "category": "Admissions",
+      "url": "https://vdcbargarh.ac.in/home/admission_rules",
+      "title": "Admission Guidelines",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "UNDATED",
+      "verification_status": "VERIFIED_OFFICIAL",
+      "academic_year": null,
+      "method": "Web reader",
+      "outcome": "Accessible",
+      "notes": "UG admission via SAMS; document verification and external selection references required."
+    },
+    {
+      "id": "S013",
+      "institution": "VDC",
+      "category": "Faculty directory",
+      "url": "https://vdcbargarh.ac.in/home/teaching",
+      "title": "Teaching Staff",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "UNDATED",
+      "verification_status": "VERIFIED_OFFICIAL",
+      "academic_year": null,
+      "method": "Web reader",
+      "outcome": "Accessible",
+      "notes": "Professional role sample retained; no photos, private contacts or account provisioning."
+    },
+    {
+      "id": "S014",
+      "institution": "VDC",
+      "category": "Contact",
+      "url": "https://vdcbargarh.ac.in/home/contact",
+      "title": "Contact Us",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "UNDATED",
+      "verification_status": "VERIFIED_OFFICIAL",
+      "academic_year": null,
+      "method": "Web reader",
+      "outcome": "Accessible",
+      "notes": "Public office contact only; contact form not submitted."
+    },
+    {
+      "id": "S015",
+      "institution": "VDC",
+      "category": "Programmes detail",
+      "url": "https://vdcbargarh.ac.in/home/programmes",
+      "title": "Programmes (navigation label)",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "UNDATED",
+      "verification_status": "UNVERIFIED",
+      "academic_year": null,
+      "method": "Web reader",
+      "outcome": "404 Not Found",
+      "notes": "No detail content inspected."
+    },
+    {
+      "id": "S016",
+      "institution": "VDC",
+      "category": "Calendar",
+      "url": "https://vdcbargarh.ac.in/home/academic_calender",
+      "title": "Academic Calender (navigation spelling)",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "UNDATED",
+      "verification_status": "UNVERIFIED",
+      "academic_year": null,
+      "method": "Web reader",
+      "outcome": "404 Not Found",
+      "notes": "No current calendar extracted."
+    },
+    {
+      "id": "S017",
+      "institution": "VDC",
+      "category": "College rules",
+      "url": "https://vdcbargarh.ac.in/home/college_rules",
+      "title": "College Rules",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "UNDATED",
+      "verification_status": "VERIFIED_OFFICIAL",
+      "academic_year": null,
+      "method": "Web reader",
+      "outcome": "Accessible; body is image-based",
+      "notes": "No machine-readable rule text. Linked image not transcribed; thresholds unknown."
+    },
+    {
+      "id": "S018",
+      "institution": "VDC",
+      "category": "Scholarships",
+      "url": "https://vdcbargarh.ac.in/home/scholarship",
+      "title": "Scholarship",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "UNDATED",
+      "verification_status": "VERIFIED_OFFICIAL",
+      "academic_year": null,
+      "method": "Web reader",
+      "outcome": "Accessible; body is image-based",
+      "notes": "No scheme amounts or eligibility verified."
+    },
+    {
+      "id": "S019",
+      "institution": "VDC",
+      "category": "Hostel",
+      "url": "https://vdcbargarh.ac.in/home/hostel",
+      "title": "Hostel",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "UNDATED",
+      "verification_status": "VERIFIED_OFFICIAL",
+      "academic_year": null,
+      "method": "Web reader",
+      "outcome": "Accessible; body is image-based",
+      "notes": "No room capacity, rates or allocation policy extracted."
+    },
+    {
+      "id": "S020",
+      "institution": "VDC",
+      "category": "Placement and training",
+      "url": "https://vdcbargarh.ac.in/home/training_placement",
+      "title": "Training & Placement",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "UNDATED",
+      "verification_status": "VERIFIED_OFFICIAL",
+      "academic_year": null,
+      "method": "Web reader",
+      "outcome": "Accessible",
+      "notes": "Published training, counselling, internship and visit activities; no placement totals used."
+    },
+    {
+      "id": "S021",
+      "institution": "VDC",
+      "category": "IQAC",
+      "url": "https://vdcbargarh.ac.in/home/iqac",
+      "title": "IQAC",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "UNDATED",
+      "verification_status": "VERIFIED_OFFICIAL",
+      "academic_year": null,
+      "method": "Web reader",
+      "outcome": "Accessible; no document rows in extracted table",
+      "notes": "Presence of page does not establish accreditation."
+    },
+    {
+      "id": "S022",
+      "institution": "VDC",
+      "category": "SSR",
+      "url": "https://vdcbargarh.ac.in/home/ssr",
+      "title": "SSR",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "UNDATED",
+      "verification_status": "VERIFIED_OFFICIAL",
+      "academic_year": null,
+      "method": "Web reader",
+      "outcome": "Accessible; no document rows in extracted table",
+      "notes": "No NAAC grade verified."
+    },
+    {
+      "id": "S023",
+      "institution": "VDC",
+      "category": "Examination and certificate notices",
+      "url": "https://vdcbargarh.ac.in/home/notice",
+      "title": "Notice",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "HISTORICAL",
+      "verification_status": "HISTORICAL",
+      "academic_year": "2024-25",
+      "method": "Web reader",
+      "outcome": "Accessible",
+      "notes": "Titles/date metadata only. PDF icons do not establish document contents. Latest listed notice dated 2025-05-07."
+    },
+    {
+      "id": "S024",
+      "institution": "VDC",
+      "category": "Crawler policy",
+      "url": "https://vdcbargarh.ac.in/robots.txt",
+      "title": "robots.txt",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "UNDATED",
+      "verification_status": "VERIFIED_OFFICIAL",
+      "academic_year": null,
+      "method": "HTTP",
+      "outcome": "HTTP 200 text/plain",
+      "notes": "User-agent *; Allow /."
+    },
+    {
+      "id": "S025",
+      "institution": "VSBM",
+      "category": "Linked website availability",
+      "url": "https://vsbm.vheibargarh.in/",
+      "title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "UNDATED",
+      "verification_status": "UNVERIFIED",
+      "academic_year": null,
+      "method": "Web reader + HTTP",
+      "outcome": "HTTP 200 common VHEI HTML shell",
+      "notes": "Distinct institution content NOT independently inspected. VSBM and VLS initially failed in web reader; HTTP retry succeeded. Membership evidence is S001."
+    },
+    {
+      "id": "S026",
+      "institution": "VPT",
+      "category": "Linked website availability",
+      "url": "https://vpt.vheibargarh.in/",
+      "title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "UNDATED",
+      "verification_status": "UNVERIFIED",
+      "academic_year": null,
+      "method": "Web reader + HTTP",
+      "outcome": "HTTP 200 common VHEI HTML shell",
+      "notes": "Distinct institution content NOT independently inspected. VSBM and VLS initially failed in web reader; HTTP retry succeeded. Membership evidence is S001."
+    },
+    {
+      "id": "S027",
+      "institution": "VLS",
+      "category": "Linked website availability",
+      "url": "https://vls.vheibargarh.in/",
+      "title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "UNDATED",
+      "verification_status": "UNVERIFIED",
+      "academic_year": null,
+      "method": "Web reader + HTTP",
+      "outcome": "HTTP 200 common VHEI HTML shell",
+      "notes": "Distinct institution content NOT independently inspected. VSBM and VLS initially failed in web reader; HTTP retry succeeded. Membership evidence is S001."
+    },
+    {
+      "id": "S028",
+      "institution": "VNC",
+      "category": "Linked website availability",
+      "url": "https://vnc.vheibargarh.in/",
+      "title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "UNDATED",
+      "verification_status": "UNVERIFIED",
+      "academic_year": null,
+      "method": "Web reader + HTTP",
+      "outcome": "HTTP 200 common VHEI HTML shell",
+      "notes": "Distinct institution content NOT independently inspected. VSBM and VLS initially failed in web reader; HTTP retry succeeded. Membership evidence is S001."
+    },
+    {
+      "id": "S029",
+      "institution": "VPC",
+      "category": "Linked website availability",
+      "url": "https://vpc.vheibargarh.in/",
+      "title": "VHEI Bargarh | Vikash Higher Educational Institutions",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "UNDATED",
+      "verification_status": "UNVERIFIED",
+      "academic_year": null,
+      "method": "Web reader + HTTP",
+      "outcome": "HTTP 200 common VHEI HTML shell",
+      "notes": "Distinct institution content NOT independently inspected. VSBM and VLS initially failed in web reader; HTTP retry succeeded. Membership evidence is S001."
+    },
+    {
+      "id": "S030",
+      "institution": "VHSS",
+      "category": "Identity and group context",
+      "url": "https://vhssbgh.krishnavikash.com/Home/About",
+      "title": "About - Vikash Higher Secondary School, Bargarh",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "UNDATED",
+      "verification_status": "VERIFIED_OFFICIAL",
+      "academic_year": null,
+      "method": "Web reader",
+      "outcome": "Accessible",
+      "notes": "Own site identifies Krishna Vikash Group; not listed in S001 higher-education directory. Do not infer common administration."
+    },
+    {
+      "id": "S031",
+      "institution": "VHSS",
+      "category": "Streams and academic model",
+      "url": "https://vhssbgh.krishnavikash.com/Home/Academics",
+      "title": "Academics - Vikash Higher Secondary School, Bargarh",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "UNDATED",
+      "verification_status": "VERIFIED_OFFICIAL",
+      "academic_year": null,
+      "method": "Web reader",
+      "outcome": "Accessible",
+      "notes": "Science and Commerce under CHSE advertised; approval-number fields blank. No current sanction adopted."
+    },
+    {
+      "id": "S032",
+      "institution": "VHSS",
+      "category": "Admissions",
+      "url": "https://vhssbgh.krishnavikash.com/Home/Admissions",
+      "title": "Admissions - Vikash Higher Secondary School, Bargarh",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "HISTORICAL",
+      "verification_status": "HISTORICAL",
+      "academic_year": null,
+      "method": "Search excerpt",
+      "outcome": "Excerpt accessible",
+      "notes": "Mentions legacy e-admission procedure from 2011-12; current policy not adopted."
+    },
+    {
+      "id": "S033",
+      "institution": "VHSS",
+      "category": "Contact",
+      "url": "https://vhssbgh.krishnavikash.com/Home/ContactUs",
+      "title": "Contact - Vikash Higher Secondary School, Bargarh",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "UNDATED",
+      "verification_status": "VERIFIED_OFFICIAL",
+      "academic_year": null,
+      "method": "Search excerpt",
+      "outcome": "Excerpt accessible",
+      "notes": "Same Knowledge Hub location advertised; does not prove VHEI ERP membership."
+    },
+    {
+      "id": "S034",
+      "institution": "VHSS",
+      "category": "Historical CHSE listing",
+      "url": "https://chseodisha.nic.in/wp-content/uploads/2024/08/BARAGARH.pdf",
+      "title": "affiliated higher secondary school.xlsx",
+      "extracted_on": "2026-10-14",
+      "publication_date": null,
+      "temporal_status": "HISTORICAL",
+      "verification_status": "HISTORICAL",
+      "academic_year": "2024",
+      "method": "Web reader",
+      "outcome": "Accessible PDF text",
+      "notes": "Historical district school listing; not evidence of VHEI governance."
+    }
+  ],
+  "reference_resolution": {
+    "date": "2026-10-14",
+    "authorization": "User: make erp by removing conflicts",
+    "rules": [
+      "Preserve institution-specific published addresses; never overwrite them with group postcode.",
+      "Prefer VIT own website programme nomenclature for VIT seed; do not seed AI & ML from conflicting central directory.",
+      "VHSS remains outside initial institution inventory; common campus does not establish governance.",
+      "Reference advertisements do not establish current approval, intake, fee rules or certificate authority.",
+      "No privileged accounts derived from public professional directory."
+    ]
+  }
+}

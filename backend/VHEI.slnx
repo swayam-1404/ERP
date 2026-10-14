@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/VHEI.Api/VHEI.Api.csproj" />
+    <Project Path="src/VHEI.Application/VHEI.Application.csproj" />
+    <Project Path="src/VHEI.Domain/VHEI.Domain.csproj" />
+    <Project Path="src/VHEI.Infrastructure/VHEI.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/VHEI.IntegrationTests/VHEI.IntegrationTests.csproj" />
+  </Folder>
+</Solution>

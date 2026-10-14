@@ -1,0 +1,10 @@
+{
+  "date": "2026-10-14",
+  "passed": 16,
+  "failed": 0,
+  "sources": 34,
+  "facts": 99,
+  "module_features": 190,
+  "total_requirements": 219,
+  "scope": "Discovery artifacts only; no application tests"
+}

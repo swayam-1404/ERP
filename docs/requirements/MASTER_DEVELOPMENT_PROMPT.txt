@@ -1,0 +1,1310 @@
+MASTER DEVELOPMENT PROMPT
+
+VHEI BARGARH — COMPLETE MULTI-INSTITUTION ERP
+
+ASP.NET Core 10 + PostgreSQL + React + Flutter + Hostinger KVM 2
+
+You are acting as a Senior Enterprise Software Architect, Full-Stack .NET Developer, Database Architect, UI/UX Designer, QA Engineer, DevOps Engineer, and Institutional ERP Business Analyst.
+
+Your assignment is to research, design, develop, test, document, and prepare a complete production-grade Enterprise Resource Planning (ERP) platform for Vikash Higher Educational Institutions (VHEI), Bargarh, Odisha, India.
+
+This must be a real, working, modular, maintainable application—not merely UI mockups, sample screenshots, placeholder dashboards, or disconnected code.
+
+Work systematically, phase by phase, and validate each completed component before proceeding.
+
+---
+
+1. PROJECT OBJECTIVE
+
+Build a centralized, multi-institution ERP platform covering the complete student and institutional lifecycle:
+
+Admission → Enrollment → Academic Management → Attendance → Examinations → Results → Finance → Graduation → Marksheet and Certificate Generation → Alumni Management.
+
+The platform must support multiple institutions, departments, academic programmes, batches, semesters, students, faculty, administrators, and management personnel.
+
+Each institution must have its own academic configuration and operational records while authorized central VHEI management can access consolidated information.
+
+The application must support:
+
+- Central VHEI management dashboard
+- Institution-specific administration
+- Principal and HOD dashboards
+- Faculty portal
+- Student portal
+- Parent/guardian portal
+- Examination Cell portal
+- Finance and accounts portal
+- HR and administrative portal
+- Library, hostel, transport and placement management
+- Certificate generation and verification
+- Alumni portal
+- Responsive web interfaces
+- Flutter mobile application
+- Secure APIs
+- Production deployment on Hostinger KVM 2
+
+2. RESEARCH REAL COLLEGE INFORMATION FIRST
+
+Before creating the database or building the frontend, investigate the actual institution websites.
+
+Primary source:
+
+https://vheibargarh.in
+
+Also research verified official websites associated with VHEI, including, where applicable:
+
+- Vikash Institute of Technology, Bargarh
+- Vikash Degree College, Bargarh
+- Vikash Higher Secondary School, Bargarh
+- Other institutions officially confirmed as part of VHEI
+
+Do not assume that similarly named institutions belong to the same group.
+
+2.1 Website investigation
+
+Inspect accessible pages, navigation menus, submenus, downloadable PDFs, admission pages, academic pages, administration pages, faculty directories, notices, programme information, and official instructions.
+
+Extract:
+
+1. Official institution names
+2. Institution hierarchy and campus locations
+3. Official addresses and contact information
+4. Institutional logos and branding information
+5. Departments and programmes
+6. Courses, branches and academic structures
+7. Academic affiliation and approval information
+8. Principal, Director, Chairman, CAO, HOD and other published designations
+9. Public faculty directories and officially published professional information
+10. Admission procedures and eligibility
+11. Academic calendars
+12. Examination-related instructions
+13. Public fee information, if available
+14. Scholarship information
+15. Library, hostel and transport information
+16. Training and placement details
+17. Published institutional notices
+18. Public policies and institutional regulations
+19. Available official forms and downloadable documents
+20. Accreditation and compliance information
+
+2.2 Research requirements
+
+For every extracted item, record:
+
+- Institution
+- Data category
+- Exact source URL
+- Source document or page title
+- Date of extraction
+- Publication date, if available
+- Whether the information is current, historical or undated
+- Verification status
+- Relevant academic year, where applicable
+
+Maintain a research evidence register.
+
+Classify information as:
+
+- VERIFIED_OFFICIAL
+- VERIFIED_SECONDARY
+- UNVERIFIED
+- HISTORICAL
+- DEMO
+
+Only verified official information should automatically populate institutional master data.
+
+Do not invent faculty names, designations, institutional affiliations, official fee structures, academic regulations, or university policies.
+
+If a website is inaccessible, record the failure, retry reasonably, and continue with verified available information. Never pretend that an inaccessible page was inspected.
+
+Respect robots.txt, website terms, rate limits, copyright, and personal data protections. Do not bypass authentication or collect private student information.
+
+Do not republish copyrighted photos, documents or logos without appropriate permission. Store references or obtain approved assets when needed.
+
+2.3 Research deliverables
+
+Create:
+
+docs/research/institution_inventory.md
+
+docs/research/verified_institution_data.json
+
+docs/research/source_register.csv
+
+docs/research/academic_rules.md
+
+docs/research/unknowns_and_assumptions.md
+
+docs/research/website_analysis.md
+
+Provide a source URL for every factual institutional claim.
+
+3. APPROVED TECHNOLOGY STACK
+
+Use the following architecture unless a technical incompatibility requires a documented alternative.
+
+Backend
+
+- C#
+- ASP.NET Core 10 LTS
+- ASP.NET Core Web API
+- Entity Framework Core
+- PostgreSQL
+- ASP.NET Core Identity
+- Policy-based role authorization
+- FluentValidation or equivalent validation
+- OpenAPI documentation
+- SignalR
+- Hangfire for background processing
+- Serilog
+- OpenTelemetry
+- QuestPDF for PDF generation, subject to licensing review
+
+Frontend
+
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- shadcn/ui
+- React Router
+- TanStack Query
+- React Hook Form
+- Zod
+- Recharts
+- Accessible, responsive UI components
+
+Mobile
+
+- Flutter
+- Dart
+- Secure authentication
+- Student and faculty dashboards
+- Notifications
+- Academic information access
+
+Infrastructure
+
+- Ubuntu LTS
+- Hostinger KVM 2 VPS
+- Docker Compose
+- Nginx
+- PostgreSQL
+- Optional Redis, only when justified
+- Let's Encrypt SSL
+- GitHub Actions
+- S3-compatible object storage
+- Encrypted off-server backups
+
+Use a modular monolith with clear domain boundaries. Do not create unnecessary microservices or Kubernetes infrastructure.
+
+The target server has approximately 2 vCPU, 8 GB RAM and 100 GB NVMe storage. Verify the actual VPS specifications before deployment.
+
+Optimize the application for this resource limit.
+
+4. PROJECT STRUCTURE
+
+Create a clean repository using this structure:
+
+VHEI-ERP/
+backend/
+src/
+VHEI.Api/
+VHEI.Application/
+VHEI.Domain/
+VHEI.Infrastructure/
+VHEI.Modules/
+Institutions/
+Admissions/
+Students/
+Faculty/
+Attendance/
+Timetable/
+Examinations/
+Finance/
+Certificates/
+HR/
+Library/
+HostelTransport/
+LMS/
+Placements/
+Compliance/
+Administration/
+tests/
+VHEI.UnitTests/
+VHEI.IntegrationTests/
+VHEI.SecurityTests/
+frontend/
+src/
+app/
+components/
+layouts/
+pages/
+modules/
+hooks/
+services/
+types/
+styles/
+mobile/
+vhei_app/
+database/
+migrations/
+seeds/
+infrastructure/
+docker/
+nginx/
+monitoring/
+scripts/
+docs/
+research/
+architecture/
+api/
+database/
+testing/
+deployment/
+.github/
+workflows/
+README.md
+.env.example
+docker-compose.yml
+
+The exact .NET project organization may be refined if required, but preserve the module boundaries.
+
+5. MULTI-INSTITUTION DATABASE DESIGN
+
+Use PostgreSQL as the primary database.
+
+Design normalized relational tables with appropriate foreign keys, indexes, unique constraints and transactional consistency.
+
+Core entities should include:
+
+- Institutions
+- Campuses
+- Departments
+- Programmes
+- AcademicSessions
+- Semesters
+- Courses
+- Subjects
+- Sections
+- Users
+- Roles
+- Permissions
+- UserInstitutionAssignments
+- Students
+- Guardians
+- Faculty
+- Staff
+- Admissions
+- Enrollments
+- SubjectRegistrations
+- Timetables
+- ClassSessions
+- AttendanceRecords
+- AttendanceCorrections
+- Examinations
+- ExamRegistrations
+- AssessmentComponents
+- Marks
+- Grades
+- Results
+- Backlogs
+- FeeStructures
+- StudentInvoices
+- Payments
+- Refunds
+- LedgerEntries
+- Scholarships
+- LeaveRequests
+- ApprovalWorkflows
+- LibraryBooks
+- BookTransactions
+- HostelRooms
+- HostelAllocations
+- TransportRoutes
+- PlacementDrives
+- GraduationEligibility
+- CertificateTemplates
+- CertificateRequests
+- CertificateApprovals
+- IssuedCertificates
+- CertificateVerifications
+- AlumniRecords
+- AuditLogs
+- Notifications
+- Documents
+
+Requirements:
+
+- UUID identifiers where appropriate
+- Institution-based data isolation
+- Referential integrity
+- Academic-year versioning
+- Soft deletion only where legally and operationally appropriate
+- Immutable financial transaction history
+- Auditable mark modifications
+- Secure student document storage
+- Database migrations
+- Automated backups
+- Transaction-safe operations
+
+Prevent cross-institution data leakage even if a user manipulates API requests.
+
+6. COMPLETE ERP MODULES
+
+Develop all the following modules.
+
+Module 1 — Central Administration
+
+Features:
+
+- Institution management
+- Campus management
+- Department and programme configuration
+- Academic sessions
+- Semester management
+- Role management
+- Permission management
+- Central notices
+- Approval workflows
+- Management analytics
+- Institutional reports
+- Audit trails
+
+Module 2 — Admissions
+
+Features:
+
+- Admission enquiry
+- Applicant registration
+- Application tracking
+- Programme selection
+- Eligibility verification
+- Document verification
+- External counselling reference tracking
+- Admission approval
+- Admission fee confirmation
+- Student enrollment
+- Admission cancellation
+- Admission reports
+
+Support institution-specific admission rules.
+
+Do not assume the ERP replaces SAMS Odisha, OJEE, or other official admission systems.
+
+Module 3 — Student Information System
+
+Features:
+
+- Student registration
+- Student profile
+- Guardian information
+- Institution and department assignment
+- Batch and section assignment
+- Subject enrollment
+- Academic history
+- Scholarships
+- Documents
+- Transfer records
+- Student status
+- Alumni conversion
+
+Module 4 — Faculty and HR
+
+Features:
+
+- Faculty profiles
+- Staff profiles
+- Department assignments
+- Teaching workload
+- Leave requests
+- Leave approvals
+- Staff attendance
+- Payroll
+- Salary slips
+- Recruitment
+- Appraisals
+- Service records
+
+Module 5 — Timetable and Attendance
+
+Features:
+
+- Timetable creation
+- Period allocation
+- Faculty allocation
+- Classroom and laboratory allocation
+- Conflict detection
+- Attendance by period
+- Attendance by subject
+- Practical attendance
+- Attendance correction requests
+- Shortage alerts
+- Student attendance analytics
+- Parent attendance visibility
+
+Module 6 — Examinations and Results
+
+Features:
+
+- Examination calendar
+- Class tests
+- Internal assessments
+- Practical examinations
+- Assignment marks
+- Exam registration tracking
+- Marks entry
+- Marks moderation
+- Result approval
+- Result publication
+- SGPA and CGPA calculations
+- Backlog management
+- Grade reports
+- Academic transcripts
+
+Do not hard-code university grading regulations.
+
+Create configurable, versioned grading rules and use only verified regulations for official calculations.
+
+Module 7 — Finance and Accounts
+
+Features:
+
+- Fee structures
+- Semester fees
+- Hostel fees
+- Transport fees
+- Installments
+- Concessions
+- Scholarships
+- Fee collection
+- Receipts
+- Refunds
+- Outstanding dues
+- Payment reconciliation
+- Financial reports
+- Audit logs
+
+Use double-entry accounting principles where the scope requires general-ledger accounting.
+
+Do not integrate live payment gateways until authorized merchant credentials and payment processes are available.
+
+Module 8 — Learning Management
+
+Features:
+
+- Learning materials
+- Notes
+- Assignments
+- Assignment submissions
+- Quizzes
+- MCQ tests
+- Question banks
+- Syllabus tracking
+- Course progress
+- Learning analytics
+
+Module 9 — Library
+
+Features:
+
+- Book catalogue
+- Book copies
+- Barcode/QR identification
+- Issue and return
+- Renewal
+- Reservations
+- Overdue tracking
+- Fines
+- Inventory reports
+
+Module 10 — Hostel and Transport
+
+Features:
+
+- Hostel management
+- Room allocation
+- Occupancy reports
+- Hostel fee integration
+- Gate passes
+- Complaints
+- Transport routes
+- Vehicle records
+- Driver records
+- Transport subscriptions
+- Maintenance records
+
+Module 11 — Placement and Training
+
+Features:
+
+- Student placement profiles
+- Company records
+- Recruiter records
+- Placement drives
+- Eligibility filters
+- Aptitude tests
+- Interview schedules
+- Internship tracking
+- Offer tracking
+- Placement analytics
+
+Module 12 — Compliance and Governance
+
+Features:
+
+- Accreditation evidence
+- AICTE-related records
+- University affiliation documents
+- IQAC records
+- NAAC evidence
+- Committees
+- Meeting records
+- Grievance management
+- Anti-ragging workflows
+- Compliance reminders
+- Institutional reports
+
+Module 13 — Website CMS and Communication
+
+Features:
+
+- Notices
+- News
+- Events
+- Academic calendar
+- Faculty directory
+- Department pages
+- Gallery
+- Achievements
+- Public announcements
+- Email notifications
+- SMS integrations
+- Push notifications
+
+Do not automatically overwrite the live institutional website.
+
+Module 14 — Inventory and Facilities
+
+Features:
+
+- Asset inventory
+- Laboratory equipment
+- Purchase requests
+- Purchase orders
+- Vendors
+- Stock management
+- Maintenance requests
+- Asset assignment
+- Facility booking
+- Inventory reporting
+
+Module 15 — Research and Alumni
+
+Features:
+
+- Research publications
+- Projects
+- Grants
+- Seminars
+- Workshops
+- MOUs
+- Alumni directory
+- Alumni events
+- Alumni academic records
+- Alumni document requests
+
+Module 16 — Marksheet, Certificates and Graduation
+
+This module is mandatory and must be fully functional.
+
+Features:
+
+- Semester marksheet generation
+- Consolidated marksheet generation
+- Academic transcript generation
+- Graduation eligibility checking
+- Backlog clearance verification
+- Course completion certificates
+- Provisional certificates where authorized
+- University-issued degree record management
+- Certificate templates
+- Batch certificate generation
+- Certificate serial numbers
+- QR code verification
+- Authorized digital signatures
+- Certificate approval workflow
+- Secure PDF downloads
+- Duplicate certificate requests
+- Certificate correction and reissue
+- Revocation status
+- Alumni certificate access
+
+The ERP must not independently issue university degrees without the necessary legal authority.
+
+For university-affiliated institutions, generate only documents the institution is authorized to issue, and maintain verifiable records or copies of university-issued degrees.
+
+7. REAL DATA VS DEMO DATA
+
+This is a critical project requirement.
+
+Use verified public institutional information for institutional master data.
+
+Use realistic but entirely synthetic data for private operational records.
+
+7.1 Real data
+
+Extract and use verified public information for:
+
+- Institution names
+- Campuses
+- Departments
+- Programmes
+- Published academic structures
+- Official designations
+- Public faculty directory information
+- Official institutional contact details
+- Published notices
+- Official branding, subject to permission
+- Verified academic regulations
+
+Every real-data seed record must retain source provenance.
+
+7.2 Synthetic student data
+
+Generate at least 500 synthetic student records for development.
+
+Distribute them across verified institutions, programmes, batches, and departments.
+
+If exact programme information is unavailable, use clearly labeled DEMO programmes rather than representing assumptions as verified facts.
+
+Include realistic relationships between:
+
+- Student
+- Guardian
+- Institution
+- Programme
+- Department
+- Semester
+- Section
+- Enrollment
+- Attendance
+- Subject registration
+- Marks
+- Results
+- Fee accounts
+
+Use fictional names and fictional contact information.
+
+Do not accidentally use real phone numbers or email addresses.
+
+Use reserved example domains for synthetic email addresses.
+
+Include sample records for:
+
+- Active students
+- Newly admitted students
+- Students with low attendance
+- Students with backlogs
+- Students who cleared backlogs
+- Graduated students
+- Alumni
+- Students with pending fees
+- Scholarship recipients
+
+7.3 Synthetic finance data
+
+Generate realistic but fictional financial transactions.
+
+Include:
+
+- Tuition fees
+- Admission fees
+- Examination fees
+- Hostel fees
+- Transport fees
+- Installment payments
+- Discounts
+- Scholarships
+- Refunds
+- Pending balances
+- Overpayments
+- Partial payments
+
+Use INR currency.
+
+Use configurable synthetic fee structures, not invented claims about VHEI's actual fees.
+
+Create at least 12 months of sample financial history.
+
+All demo transactions must be labeled DEMO.
+
+No real banking details, government identifiers, or payment credentials.
+
+7.4 Demo data safety
+
+Implement separate seed modes:
+
+1. Verified institutional reference data
+2. Synthetic development data
+3. Minimal production configuration
+
+Never insert synthetic students, payments, marks or certificates into production automatically.
+
+Development data must be deterministic using a documented random seed.
+
+Create commands to reset and regenerate the demo dataset.
+
+8. UI/UX DESIGN REQUIREMENTS
+
+Build a professional, modern institutional ERP interface.
+
+Use a consistent institutional design system based on verified VHEI branding.
+
+If official branding cannot be verified, use a temporary configurable theme.
+
+Requirements:
+
+- Responsive desktop and mobile layouts
+- Sidebar navigation
+- Role-specific dashboards
+- Searchable data tables
+- Pagination
+- Filters
+- Export functionality
+- Forms with validation
+- Loading states
+- Error states
+- Empty states
+- Accessible controls
+- Confirmation dialogs
+- Notifications
+- Print-friendly reports
+- Dark mode only if it does not compromise institutional branding
+
+Do not create one generic dashboard for every role.
+
+Each role should have its own navigation, permissions and relevant metrics.
+
+Use real API responses instead of hard-coded dashboard totals.
+
+9. AUTHENTICATION AND SECURITY
+
+Implement:
+
+- Secure login and logout
+- Password hashing using ASP.NET Core Identity
+- Role-based access control
+- Policy-based authorization
+- Institution-scoped permissions
+- MFA for privileged accounts
+- Session expiry
+- Refresh/session renewal controls
+- Account lockout
+- Rate limiting
+- Input validation
+- CSRF protection where applicable
+- Secure file uploads
+- Private document access
+- Audit logs
+- Database transaction protection
+- Secrets management
+- HTTPS
+- Secure cookie configuration
+- Backup and recovery procedures
+
+Use secure HTTP-only cookies for the web portal where practical. Do not store sensitive long-lived tokens in browser localStorage.
+
+Security testing must include attempts to access another institution's students, marks, finance records and documents.
+
+10. API DEVELOPMENT
+
+Build documented REST APIs.
+
+Examples:
+
+/api/auth
+/api/institutions
+/api/departments
+/api/programmes
+/api/students
+/api/faculty
+/api/admissions
+/api/attendance
+/api/timetables
+/api/examinations
+/api/results
+/api/finance
+/api/certificates
+/api/library
+/api/hostel
+/api/transport
+/api/placements
+/api/alumni
+/api/reports
+
+Requirements:
+
+- API versioning strategy
+- Consistent response contracts
+- Pagination
+- Filtering
+- Sorting
+- Validation
+- Error handling
+- OpenAPI documentation
+- Authorization
+- Integration tests
+- Database transactions
+- Idempotency for sensitive financial operations
+
+11. CERTIFICATE GENERATION IMPLEMENTATION
+
+Build the certificate system with:
+
+ASP.NET Core + PostgreSQL + QuestPDF + QR verification.
+
+Workflow:
+
+1. Student completes programme requirements.
+2. Eligibility engine evaluates the applicable programme rules.
+3. Examination Cell verifies final academic results.
+4. Authorized officer approves the certificate.
+5. Background worker generates the PDF.
+6. Certificate is assigned a unique registry number.
+7. PDF is digitally signed where authorized.
+8. Document is stored securely.
+9. Student receives notification.
+10. Student or alumnus downloads the document.
+11. External verifier checks the certificate through a secure verification page.
+
+Store:
+
+- Certificate ID
+- Institution ID
+- Student ID
+- Certificate type
+- Template version
+- Issue date
+- Approval history
+- Document hash
+- Signature status
+- Storage reference
+- Verification status
+- Reissue history
+
+Do not expose private student records on the public verification page.
+
+12. DEVELOPMENT PHASES
+
+Follow these phases in order.
+
+PHASE 0 — Discovery and Verification
+
+Tasks:
+
+- Research institutional websites
+- Extract verified public information
+- Identify institution hierarchy
+- Document academic structures
+- Record unknown rules
+- Define project requirements
+- Create traceability matrix
+- Create implementation roadmap
+
+Deliverables:
+
+- Research report
+- Source register
+- Requirements specification
+- Institution hierarchy
+- Module inventory
+- Initial database entity list
+
+Do not start the implementation until the initial research report is completed.
+
+PHASE 1 — Architecture and Project Setup
+
+Tasks:
+
+- Create Git repository structure
+- Initialize .NET solution
+- Initialize React frontend
+- Configure PostgreSQL
+- Configure Docker Compose
+- Configure environment files
+- Configure logging
+- Configure OpenAPI
+- Configure CI checks
+- Create architectural documentation
+
+Verify:
+
+- Backend builds
+- Frontend builds
+- PostgreSQL connects
+- Health endpoint works
+- Docker services start
+- Initial tests pass
+
+PHASE 2 — Authentication and Multi-Institution Core
+
+Tasks:
+
+- Identity
+- Roles
+- Permissions
+- Institutions
+- Campuses
+- Departments
+- Programmes
+- Academic sessions
+- User assignments
+- Audit logs
+
+Verify:
+
+- Users can log in
+- Permissions are enforced
+- Institution isolation works
+- Admin dashboard loads
+- Unauthorized access is blocked
+
+PHASE 3 — Student and Faculty Management
+
+Tasks:
+
+- Student CRUD
+- Faculty CRUD
+- Guardian management
+- Student enrollment
+- Faculty assignments
+- Synthetic data generation
+- Profile pages
+- Search and filters
+
+Verify:
+
+- Student and faculty records persist
+- Relationships are valid
+- Forms validate correctly
+- Pagination works
+- Demo seed works
+- Data isolation works
+
+PHASE 4 — Timetable and Attendance
+
+Tasks:
+
+- Subject allocation
+- Timetable management
+- Class sessions
+- Period-wise attendance
+- Attendance correction workflow
+- Student attendance dashboard
+- Attendance reports
+
+Verify:
+
+- No invalid faculty/classroom conflicts
+- Attendance percentages calculate correctly
+- Corrections are audited
+- Student permissions work
+
+PHASE 5 — Examinations and Results
+
+Tasks:
+
+- Examination setup
+- Assessment components
+- Marks entry
+- Grade calculations
+- Result approval
+- Result publication
+- Backlog management
+- SGPA/CGPA computation
+
+Verify using independent calculation tests and verified grading rules.
+
+Do not publish unapproved results.
+
+PHASE 6 — Finance
+
+Tasks:
+
+- Synthetic fee structures
+- Student invoices
+- Payments
+- Receipts
+- Installments
+- Scholarships
+- Refunds
+- Due calculations
+- Financial dashboard
+
+Verify:
+
+- Balances reconcile
+- No duplicate payment processing
+- Refunds require authorization
+- Transaction histories are auditable
+- Reports match ledger data
+
+PHASE 7 — Marksheet and Certificates
+
+Tasks:
+
+- Marksheet templates
+- Consolidated transcripts
+- Graduation eligibility
+- Completion certificates
+- Approval workflows
+- PDF generation
+- QR verification
+- Alumni downloads
+
+Verify:
+
+- Marks match approved results
+- Grade calculations are correct
+- Certificate numbers are unique
+- PDFs render correctly
+- Verification detects invalid or revoked certificates
+- Unauthorized issuance is blocked
+
+PHASE 8 — Additional ERP Modules
+
+Implement:
+
+- HR
+- Leave
+- Library
+- Hostel
+- Transport
+- LMS
+- Placements
+- Compliance
+- Inventory
+- Research
+- Alumni
+- CMS
+- Notifications
+
+Complete and test each module independently.
+
+PHASE 9 — Flutter Mobile Application
+
+Build student and faculty mobile experiences.
+
+Reuse the backend APIs.
+
+Include:
+
+- Login
+- Dashboard
+- Attendance
+- Timetable
+- Results
+- Fees
+- Notifications
+- Learning materials
+- Certificate downloads
+- Faculty attendance entry
+
+Test on Android devices and emulators.
+
+PHASE 10 — Integration and Security Testing
+
+Perform:
+
+- Unit tests
+- Integration tests
+- End-to-end tests
+- Permission tests
+- Cross-institution isolation tests
+- Financial consistency tests
+- PDF generation tests
+- Certificate verification tests
+- Performance tests
+- Backup restoration tests
+- Mobile API tests
+- Accessibility checks
+
+Use Playwright for browser end-to-end tests.
+
+Test realistic concurrency for attendance submissions, student result viewing and report generation.
+
+Record measured performance, not invented capacity claims.
+
+PHASE 11 — Hostinger KVM 2 Deployment
+
+Prepare Ubuntu deployment.
+
+Tasks:
+
+- Verify VPS specifications
+- Configure SSH key authentication
+- Configure firewall
+- Install Docker Engine and Compose
+- Configure Nginx
+- Configure PostgreSQL persistence
+- Configure application containers
+- Configure environment secrets
+- Configure SSL
+- Configure object storage
+- Configure backups
+- Configure monitoring
+- Configure health checks
+- Configure deployment scripts
+- Configure rollback procedures
+
+Use a staging environment before production.
+
+Do not expose PostgreSQL publicly.
+
+Do not store sensitive secrets in Git.
+
+Do not run destructive server commands without reviewing their impact.
+
+Do not deploy, overwrite live data, change DNS, or enable real payment processing without explicit approval.
+
+PHASE 12 — Documentation and Handover
+
+Create:
+
+- Developer setup guide
+- Database documentation
+- API documentation
+- Administrator manual
+- Faculty manual
+- Student manual
+- Examination Cell manual
+- Finance manual
+- Certificate issuance manual
+- Deployment guide
+- Backup and recovery guide
+- Security operations guide
+- Troubleshooting guide
+
+13. STEP-BY-STEP WORKING RULES
+
+This is the most important instruction.
+
+Do not attempt to generate the entire ERP in one response.
+
+Work in small, verifiable development increments.
+
+For every phase:
+
+1. Explain the objective.
+2. List the files to create or modify.
+3. Implement the backend functionality.
+4. Implement required database migrations.
+5. Implement the frontend functionality.
+6. Add automated tests.
+7. Execute the available tests.
+8. Fix discovered errors.
+9. Verify API-to-frontend integration.
+10. Document results.
+11. Commit changes when GitHub access and authorization permit.
+12. Produce a phase completion report.
+
+Never mark a feature complete merely because its code was written.
+
+A feature is complete only when its behavior is implemented, validated and integrated.
+
+If execution tools are unavailable, explicitly report that tests were not executed. Do not invent test results.
+
+Maintain:
+
+docs/PROGRESS.md
+
+docs/TEST_RESULTS.md
+
+docs/KNOWN_ISSUES.md
+
+docs/DECISIONS.md
+
+docs/NEXT_STEPS.md
+
+Each progress report must contain:
+
+- Phase
+- Completed features
+- Files changed
+- Database changes
+- Tests executed
+- Passed tests
+- Failed tests
+- Known issues
+- Remaining work
+- Next implementation step
+
+14. DEFINITION OF DONE
+
+A module is complete only when:
+
+- Database schema is implemented
+- API endpoints function
+- Backend authorization is enforced
+- Frontend pages are connected
+- Forms validate
+- Data persists correctly
+- Error handling works
+- Unit and integration tests pass
+- Cross-institution isolation is tested
+- Audit requirements are implemented
+- Documentation is updated
+
+No disconnected mock pages.
+
+No fake success messages.
+
+No silent failures.
+
+No hard-coded financial dashboard totals.
+
+No placeholder functionality presented as completed.
+
+15. SPECIAL INSTRUCTIONS FOR CHATGPT WORK
+
+Use your workspace capabilities to inspect files, edit code, run commands, execute tests, inspect rendered pages and maintain project progress.
+
+If a GitHub repository is connected, inspect its existing contents before making changes.
+
+Reuse working code rather than unnecessarily rewriting it.
+
+Use a feature branch for substantial changes.
+
+Never overwrite existing code or data without understanding the consequences.
+
+If an action requires credentials, external permissions, institutional policy clarification, or production authorization, stop that specific action and request the necessary information.
+
+Continue other independent development tasks where possible.
+
+Do not fabricate research findings, executed commands, screenshots, test results, deployments or completed integrations.
+
+Prioritize correctness, security, maintainability and realistic deployment over rapid code generation.
+
+16. FIRST TASK — START NOW
+
+Begin with PHASE 0: Discovery and Verification.
+
+Your first deliverable must be a detailed institutional research report based on actual accessible VHEI websites.
+
+Specifically:
+
+1. Investigate https://vheibargarh.in.
+2. Identify verified affiliated institutions and official websites.
+3. Inspect publicly accessible departments, programmes, academic instructions and administrative information.
+4. Extract verified public institutional master data.
+5. Build a source register with URLs.
+6. Identify unknown academic and administrative rules.
+7. Produce a complete ERP requirements matrix.
+8. Propose the initial PostgreSQL entity relationships.
+9. Define the first implementation milestone.
+10. Present the Phase 0 report and identify any decisions requiring approval.
+
+After Phase 0 is accepted, proceed to Phase 1 and continue development systematically.
+
+Final goal: A fully functional, secure, multi-institution VHEI ERP built with ASP.NET Core 10, PostgreSQL, React, Flutter, and deployable on Hostinger KVM 2, using verified public college information and clearly separated synthetic operational data.

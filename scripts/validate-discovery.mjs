@@ -1,0 +1,36 @@
+import fs from 'node:fs';
+import path from 'node:path';
+const root=path.resolve(import.meta.dirname,'..');
+const read=f=>fs.readFileSync(path.join(root,f),'utf8');
+let passed=0,failed=0;
+function check(label,fn){try{if(!fn())throw new Error('check returned false'); passed++;console.log('PASS '+label);}catch(e){failed++;console.error('FAIL '+label+': '+e.message);}}
+function csv(text){const rows=[];let row=[],value='',quoted=false;for(let i=0;i<text.length;i++){const c=text[i];if(c==='"'){if(quoted&&text[i+1]==='"'){value+='"';i++;}else quoted=!quoted;}else if(c===','&&!quoted){row.push(value);value='';}else if(c==='\n'&&!quoted){row.push(value.replace(/\r$/,''));rows.push(row);row=[];value='';}else value+=c;}if(value||row.length){row.push(value);rows.push(row);}return rows;}
+const data=JSON.parse(read('docs/research/verified_institution_data.json'));
+const sources=csv(read('docs/research/source_register.csv'));
+const matrix=csv(read('docs/architecture/requirements_matrix.csv'));
+const prompt=read('docs/requirements/MASTER_DEVELOPMENT_PROMPT.txt');
+check('Required Phase 0 files present',()=>['institution_inventory.md','verified_institution_data.json','source_register.csv','academic_rules.md','unknowns_and_assumptions.md','website_analysis.md','PHASE_0_REPORT.md'].every(f=>fs.existsSync(path.join(root,'docs/research',f))));
+check('Progress files present',()=>['PROGRESS','TEST_RESULTS','KNOWN_ISSUES','DECISIONS','NEXT_STEPS'].every(f=>fs.existsSync(path.join(root,`docs/${f}.md`))));
+check('Eight unique official-directory institution references',()=>data.institutions.length===8&&new Set(data.institutions.map(i=>i.code)).size===8);
+check('Source IDs unique and CSV/JSON agree',()=>new Set(data.sources.map(s=>s.id)).size===data.sources.length&&sources.length-1===data.sources.length&&sources.slice(1).every((r,i)=>r[0]===data.sources[i].id));
+check('All source rows carry dates, categories, titles, status and HTTPS URLs',()=>data.sources.every(s=>s.extracted_on==='2026-10-14'&&s.institution&&s.category&&s.title&&s.url.startsWith('https://')&&s.temporal_status&&s.verification_status&&s.method&&s.outcome));
+check('CSV column counts consistent',()=>[sources,matrix].every(rows=>rows.every(r=>r.length===rows[0].length)));
+const byId=Object.fromEntries(data.sources.map(s=>[s.id,s]));
+let facts=[];function walk(v){if(!v||typeof v!=='object')return;if(v.source_id)facts.push(v);for(const child of Object.values(v))walk(child);}walk(data);
+check('Every extracted fact has matching provenance',()=>facts.length>0&&facts.every(f=>byId[f.source_id]?.url===f.source_url&&f.source_title&&f.extracted_on&&Object.hasOwn(f,'publication_date')&&Object.hasOwn(f,'academic_year')&&f.temporal_status&&f.verification_status));
+check('Official reference facts use inspected official sources',()=>facts.every(f=>byId[f.source_id].verification_status==='VERIFIED_OFFICIAL'));
+check('Unknown official fees, grading and issuance authorities remain empty',()=>[data.official_fee_structures,data.verified_grading_rules,data.certificate_issuance_authorities].every(a=>a.length===0));
+check('Unverified candidate cannot seed as VHEI institution',()=>data.candidate_institutions.every(i=>i.seed_eligible===false&&i.group_membership.verification_status==='UNVERIFIED'));
+check('Public role references cannot seed accounts',()=>data.public_role_references.every(r=>r.seed_eligible===false));
+const body=prompt.slice(prompt.indexOf('Module 1 —'),prompt.indexOf('7. REAL DATA VS DEMO DATA'));
+const featureMatches=[...body.matchAll(/^- (.+)$/gm)].map(m=>m[1].trim());
+const idIndex=matrix[0].indexOf('id'),featureIndex=matrix[0].indexOf('requirement'),statusIndex=matrix[0].indexOf('status');
+const features=matrix.slice(1).filter(r=>r[idIndex].startsWith('M'));
+check('Every requested module feature traced without omissions',()=>features.length===featureMatches.length&&features.every((r,i)=>r[featureIndex]===featureMatches[i]));
+check('All 16 modules represented',()=>new Set(features.map(r=>r[idIndex].split('-')[0])).size===16);
+check('Requirement IDs unique',()=>new Set(matrix.slice(1).map(r=>r[idIndex])).size===matrix.length-1);
+check('Requirement statuses remain explicit increments',()=>matrix.slice(1).every(r=>['NOT_STARTED','PARTIAL','IMPLEMENTED_VALIDATED'].includes(r[statusIndex])));
+check('No official fees, grading or issuance authority invented',()=>data.status==='ACCEPTED_FOR_LOCAL_IMPLEMENTATION'&&data.reference_resolution&&data.official_fee_structures.length===0&&data.verified_grading_rules.length===0&&data.certificate_issuance_authorities.length===0);
+const result={date:'2026-10-14',passed,failed,sources:data.sources.length,facts:facts.length,module_features:features.length,total_requirements:matrix.length-1,scope:'Discovery artifacts only; no application tests'};
+fs.mkdirSync(path.join(root,'docs/testing'),{recursive:true});fs.writeFileSync(path.join(root,'docs/testing/discovery-validation.json'),JSON.stringify(result,null,2)+'\n');
+console.log(JSON.stringify(result,null,2));process.exitCode=failed?1:0;

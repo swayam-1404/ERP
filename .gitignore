@@ -1,0 +1,26 @@
+.env
+.env.*
+!.env.example
+node_modules/
+bin/
+obj/
+dist/
+coverage/
+.dart_tool/
+build/
+*.user
+*.log
+secrets/
+backups/
+.tools/
+.local/
+TestResults/
+playwright-report/
+test-results/
+*.tsbuildinfo
+# One-time workspace generation helpers; application and setup scripts are tracked.
+scripts/create-discovery.mjs
+scripts/finish-core-ui.mjs
+scripts/integrate-student-ui.mjs
+scripts/split-web-routes.mjs
+scripts/update-progress.mjs

@@ -1,0 +1,29 @@
+name: ERP validation
+on: [push, pull_request]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_DB: vhei_test
+          POSTGRES_USER: vhei
+          POSTGRES_PASSWORD: ci-test-password
+        ports: ["5432:5432"]
+        options: --health-cmd "pg_isready -U vhei -d vhei_test" --health-interval 5s --health-timeout 3s --health-retries 20
+    env:
+      ConnectionStrings__Erp: Host=127.0.0.1;Database=vhei_test;Username=vhei;Password=ci-test-password
+      TEST_DATABASE: Host=127.0.0.1;Database=vhei_test;Username=vhei;Password=ci-test-password
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with: {dotnet-version: '10.0.x'}
+      - uses: actions/setup-node@v4
+        with: {node-version: '24', cache: npm, cache-dependency-path: frontend/package-lock.json}
+      - run: dotnet build backend/VHEI.slnx
+      - run: dotnet test backend/VHEI.slnx --no-build
+      - run: npm ci
+        working-directory: frontend
+      - run: npm run build
+        working-directory: frontend

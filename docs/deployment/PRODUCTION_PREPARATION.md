@@ -1,0 +1,7 @@
+# Production preparation — not deployed
+
+Dockerfiles and docker-compose.production.yml provide a proposed Ubuntu/API/PostgreSQL/Nginx topology. PostgreSQL has no published production port; web binds localhost 8080 for an approved external HTTPS reverse proxy. Persistent database and data-protection keys, nonroot API/web images and conservative memory limits are prepared. Docker daemon startup was unavailable here, so image/Compose startup, image ownership and production networking have not been executed or verified.
+
+Before staging: verify actual VPS specs; supply PUBLIC_HOST and secrets outside Git; create least-privilege runtime/migration database roles; review pending EF migrations; configure trusted reverse proxy/HTTPS and forwarded-header behavior; provision real administrator identities and institutional assignments with MFA; set Seed__Mode=None. Private uploaded-document storage, certificate licensing/signatures, background workers, realtime notifications, encrypted off-server backups and restore/rollback rehearsals remain future phases.
+
+Do not use this development increment for real academic decisions, financial processing or issuance. Official regulations, fee schedules and certificate authority are unset. Do not deploy, alter DNS, overwrite institutional websites/live data or enable payment processing without explicit approval. No Hostinger login, DNS or production environment was touched.
