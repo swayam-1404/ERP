@@ -17,3 +17,8 @@
 ## Implementation follow-up — 2026-10-14
 
 User instructed “make erp by removing conflicts”, accepting Phase 0 for local implementation. D001 no longer waits for acceptance. D003/D004 applied through explicit source-priority configuration, preserving evidence. .NET 10.0.402 installed locally; PostgreSQL 17.11 official Windows binaries used because Docker daemon unavailable. Core isolation is assignments + policy/scoped queries + composite FKs (RLS deferred). Current tested scope is partial phases 1–3; all later phases unimplemented.
+
+
+## Teaching increment — 2026-10-14
+
+D012: enforce dated room/faculty/cohort overlap with PostgreSQL interval exclusions; keep RLS separate as future defense. D013: snapshot roster at class creation, require complete attendance, preserve cancellation history. D014: submitted attendance changes only through independent correction review. D015: operational attendance percentage excludes Excused/unsubmitted records; no official shortage/eligibility rule inferred. D016: development faculty account mapping uses a fixed synthetic profile and audits relinking. D017: background API must load its compiled appsettings and startup must wait for actual readiness.
