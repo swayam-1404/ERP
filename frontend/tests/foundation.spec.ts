@@ -1,8 +1,7 @@
 import {test,expect} from '@playwright/test';
-import fs from 'node:fs';
-const password=fs.readFileSync(new URL('../../.env',import.meta.url),'utf8').match(/^Seed__AdminPassword=(.+)$/m)![1].trim();
+import {signIn} from './login';
 test('login, API-connected institution selection and department audit',async({page})=>{
- await page.goto('/');await page.getByLabel('Password',{exact:true}).fill(password);await page.getByRole('button',{name:'Sign in',exact:true}).click();
+ await signIn(page);
  await expect(page.getByRole('heading',{name:'A clearer view of your campus.'})).toBeVisible();
  expect((await page.request.get('/health/ready')).status()).toBe(200);
  await page.getByRole('link',{name:'Academic structure',exact:true}).click();

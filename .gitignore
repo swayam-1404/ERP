@@ -24,3 +24,7 @@ scripts/finish-core-ui.mjs
 scripts/integrate-student-ui.mjs
 scripts/split-web-routes.mjs
 scripts/update-progress.mjs
+scripts/integrate-faculty-editor.mjs
+scripts/integrate-attendance-ui.mjs
+scripts/add-scheduling-constraints.mjs
+scripts/document-phase4.mjs
