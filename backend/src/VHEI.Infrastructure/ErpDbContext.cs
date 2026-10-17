@@ -22,6 +22,9 @@ public class ErpDbContext(DbContextOptions<ErpDbContext> options) : IdentityDbCo
     public DbSet<Faculty> Faculty => Set<Faculty>();
     public DbSet<AdmissionApplication> AdmissionApplications => Set<AdmissionApplication>();
     public DbSet<AdmissionEvent> AdmissionEvents => Set<AdmissionEvent>();
+    public DbSet<AdmissionFeePlan> AdmissionFeePlans => Set<AdmissionFeePlan>();
+    public DbSet<AdmissionCharge> AdmissionCharges => Set<AdmissionCharge>();
+    public DbSet<AdmissionPayment> AdmissionPayments => Set<AdmissionPayment>();
     public DbSet<Classroom> Classrooms => Set<Classroom>();
     public DbSet<Subject> Subjects => Set<Subject>();
     public DbSet<ClassSession> ClassSessions => Set<ClassSession>();
@@ -32,6 +35,7 @@ public class ErpDbContext(DbContextOptions<ErpDbContext> options) : IdentityDbCo
     protected override void OnModelCreating(ModelBuilder model)
     {
         base.OnModelCreating(model);
+        ConfigureFinance(model);
         ConfigureScoped<TimetableSeries>(model);
         model.Entity<TimetableSeries>().Property(x=>x.Version).IsConcurrencyToken();
         model.Entity<TimetableSeries>().Property(x=>x.Name).HasMaxLength(120);
@@ -52,9 +56,13 @@ public class ErpDbContext(DbContextOptions<ErpDbContext> options) : IdentityDbCo
         model.Entity<AdmissionApplication>().HasOne<Programme>().WithMany().HasForeignKey(x=>new{x.InstitutionId,x.ProgrammeId}).HasPrincipalKey(x=>new{x.InstitutionId,x.Id}).OnDelete(DeleteBehavior.Restrict);
         model.Entity<AdmissionApplication>().HasOne<AcademicSession>().WithMany().HasForeignKey(x=>new{x.InstitutionId,x.AcademicSessionId}).HasPrincipalKey(x=>new{x.InstitutionId,x.Id}).OnDelete(DeleteBehavior.Restrict);
         model.Entity<AdmissionApplication>().ToTable(t=>{
-            t.HasCheckConstraint("CK_Admission_Status","\"Status\" IN ('Draft','Submitted','Reviewed','Rejected','Cancelled')");
-            t.HasCheckConstraint("CK_Admission_Review","\"Status\" NOT IN ('Reviewed','Rejected') OR (\"ReviewedBy\" IS NOT NULL AND \"SubmittedBy\" IS NOT NULL AND \"ReviewedBy\" <> \"SubmittedBy\")");
+            t.HasCheckConstraint("CK_Admission_Status","\"Status\" IN ('Draft','Submitted','Reviewed','Approved','Enrolled','Rejected','Cancelled')");
+            t.HasCheckConstraint("CK_Admission_Review","\"Status\" NOT IN ('Reviewed','Approved','Enrolled','Rejected') OR (\"ReviewedBy\" IS NOT NULL AND \"SubmittedBy\" IS NOT NULL AND \"ReviewedBy\" <> \"SubmittedBy\")");
+            t.HasCheckConstraint("CK_Admission_Approval","\"Status\" NOT IN ('Approved','Enrolled') OR (\"ApprovedBy\" IS NOT NULL AND \"ApprovedBy\" <> \"SubmittedBy\" AND length(trim(\"ApprovalReference\")) >= 3)");
+            t.HasCheckConstraint("CK_Admission_Enrolled","(\"Status\" = 'Enrolled') = (\"StudentId\" IS NOT NULL)");
         });
+        model.Entity<AdmissionApplication>().HasOne<Student>().WithMany().HasForeignKey(x=>new{x.InstitutionId,x.StudentId}).HasPrincipalKey(x=>new{x.InstitutionId,x.Id}).OnDelete(DeleteBehavior.Restrict);
+        model.Entity<AdmissionApplication>().HasIndex(x=>new{x.InstitutionId,x.StudentId}).IsUnique().HasFilter("\"StudentId\" IS NOT NULL");
         model.Entity<AdmissionEvent>().HasOne<AdmissionApplication>().WithMany().HasForeignKey(x=>new{x.InstitutionId,x.ApplicationId}).HasPrincipalKey(x=>new{x.InstitutionId,x.Id}).OnDelete(DeleteBehavior.Restrict);
         model.Entity<Institution>().HasIndex(x => x.Code).IsUnique();
         model.Entity<Institution>().Property(x => x.Code).HasMaxLength(24);
@@ -110,6 +118,28 @@ public class ErpDbContext(DbContextOptions<ErpDbContext> options) : IdentityDbCo
         model.Entity<AttendanceRecord>().ToTable(t=>t.HasCheckConstraint("CK_Attendance_Status","\"Status\" IN ('Present','Absent','Excused')"));
         model.Entity<AttendanceCorrection>().HasOne<AttendanceRecord>().WithMany().HasForeignKey(x=>new{x.InstitutionId,x.AttendanceRecordId}).HasPrincipalKey(x=>new{x.InstitutionId,x.Id}).OnDelete(DeleteBehavior.Restrict);
         model.Entity<AttendanceCorrection>().ToTable(t=>{t.HasCheckConstraint("CK_Correction_Status","\"Status\" IN ('Pending','Approved','Rejected')");t.HasCheckConstraint("CK_Correction_Separation","\"ReviewedBy\" IS NULL OR \"ReviewedBy\" <> \"RequestedBy\"");});
+    }
+    private static void ConfigureFinance(ModelBuilder model)
+    {
+        ConfigureScoped<AdmissionFeePlan>(model);ConfigureScoped<AdmissionCharge>(model);ConfigureScoped<AdmissionPayment>(model);
+        model.Entity<AdmissionFeePlan>().Property(x=>x.Amount).HasPrecision(18,2);
+        model.Entity<AdmissionFeePlan>().Property(x=>x.Version).IsConcurrencyToken();
+        model.Entity<AdmissionFeePlan>().Property(x=>x.CollectionMode).HasDefaultValue("Offline");
+        model.Entity<AdmissionFeePlan>().HasOne<Programme>().WithMany().HasForeignKey(x=>new{x.InstitutionId,x.ProgrammeId}).HasPrincipalKey(x=>new{x.InstitutionId,x.Id}).OnDelete(DeleteBehavior.Restrict);
+        model.Entity<AdmissionFeePlan>().HasOne<AcademicSession>().WithMany().HasForeignKey(x=>new{x.InstitutionId,x.AcademicSessionId}).HasPrincipalKey(x=>new{x.InstitutionId,x.Id}).OnDelete(DeleteBehavior.Restrict);
+        model.Entity<AdmissionFeePlan>().ToTable(t=>{t.HasCheckConstraint("CK_FeePlan_Amount","\"Amount\" > 0 AND \"Currency\" = 'INR'");t.HasCheckConstraint("CK_FeePlan_Approval","\"Status\" = 'Draft' OR (\"Status\" = 'Approved' AND \"ApprovedBy\" IS NOT NULL AND \"ApprovedBy\" <> \"CreatedBy\")");});
+        model.Entity<AdmissionCharge>().Property(x=>x.Amount).HasPrecision(18,2);
+        model.Entity<AdmissionCharge>().HasIndex(x=>new{x.InstitutionId,x.ApplicationId}).IsUnique();
+        model.Entity<AdmissionCharge>().HasOne<AdmissionApplication>().WithMany().HasForeignKey(x=>new{x.InstitutionId,x.ApplicationId}).HasPrincipalKey(x=>new{x.InstitutionId,x.Id}).OnDelete(DeleteBehavior.Restrict);
+        model.Entity<AdmissionCharge>().HasOne<AdmissionFeePlan>().WithMany().HasForeignKey(x=>new{x.InstitutionId,x.FeePlanId}).HasPrincipalKey(x=>new{x.InstitutionId,x.Id}).OnDelete(DeleteBehavior.Restrict);
+        model.Entity<AdmissionCharge>().ToTable(t=>t.HasCheckConstraint("CK_Charge_Amount","\"Amount\" > 0 AND \"Currency\" = 'INR'"));
+        model.Entity<AdmissionPayment>().Property(x=>x.Amount).HasPrecision(18,2);
+        model.Entity<AdmissionPayment>().Property(x=>x.ExternalReference).HasMaxLength(120);
+        model.Entity<AdmissionPayment>().HasOne<AdmissionCharge>().WithMany().HasForeignKey(x=>new{x.InstitutionId,x.ChargeId}).HasPrincipalKey(x=>new{x.InstitutionId,x.Id}).OnDelete(DeleteBehavior.Restrict);
+        model.Entity<AdmissionPayment>().HasIndex(x=>new{x.InstitutionId,x.IdempotencyKey}).IsUnique();
+        model.Entity<AdmissionPayment>().HasIndex(x=>new{x.InstitutionId,x.ExternalReference}).IsUnique();
+        model.Entity<AdmissionPayment>().HasIndex(x=>new{x.InstitutionId,x.AcknowledgementNumber}).IsUnique().HasFilter("\"AcknowledgementNumber\" IS NOT NULL");
+        model.Entity<AdmissionPayment>().ToTable(t=>{t.HasCheckConstraint("CK_Payment_Amount","\"Amount\" > 0");t.HasCheckConstraint("CK_Payment_Status","\"Status\" IN ('Pending','Confirmed','Rejected')");t.HasCheckConstraint("CK_Payment_Review","\"Status\" = 'Pending' OR (\"ReviewedBy\" IS NOT NULL AND \"ReviewedBy\" <> \"RecordedBy\")");t.HasCheckConstraint("CK_Payment_Acknowledgement","(\"Status\" = 'Confirmed') = (\"AcknowledgementNumber\" IS NOT NULL)");});
     }
     private static void ConfigureScoped<T>(ModelBuilder model) where T : ScopedEntity
     {

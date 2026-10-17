@@ -1,5 +1,9 @@
 # Decisions
 
+## Admission finance — 2026-10-17
+
+D024: keep fee source year and approval separate; historical website fees never auto-activate for a new session. D025: require independent fee-plan approval/payment verification; reserve pending plus confirmed amounts and serialize financial/admission actions on the application row. Idempotency keys and normalized external references prevent duplicate payment records. D026: final approval and atomic student/guardian/enrollment conversion require a fully confirmed charge and documented authority; no portal account is silently provisioned. D027: preserve paid financial history and block cancellation pending refund/withdrawal implementation. D028: VDC +3 plans require external-portal mode and selection evidence per published SAMS guidance; manual evidence is not an automated external integration. D029: call downloadable records acknowledgements, not statutory tax receipts or bank settlement confirmations.
+
 ## Recurring timetable — 2026-10-17
 
 D021: materialize bounded weekly series as real dated periods, using the existing PostgreSQL exclusions and saved-roster attendance model. Preview is advisory; a creation conflict rolls back every generated row. D022: use explicit fixed IST for date expansion, manual skip dates and no inferred official holidays. D023: lock the series and its classes for versioned future-remainder cancellation; preserve past/submitted classes and all rosters. Template rescheduling remains a later feature.

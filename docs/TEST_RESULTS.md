@@ -1,5 +1,13 @@
 # Executed test results — 2026-10-17
 
+## Admission finance and conversion increment
+
+Final real-PostgreSQL suite: 55 passed, 0 failed/skipped (22 seconds), including nine admission-finance tests. Backend build: 0 warnings/errors. Final React production build passed. Full Playwright suite: 13 passed, 0 failed (2.6 minutes); authentication limits remained enforced and login helpers waited on actual 429 responses. Discovery consistency validator: 16 passed, 0 failed. Raw ignored backend results: backend/tests/VHEI.IntegrationTests/TestResults/finance-validation.trx. AdmissionFinanceConversion and AdmissionCollectionMode migrations applied to disposable test databases and the running local demo database.
+
+New coverage includes same-year/independent fee-plan approval, precise amounts, charge matching, payment confirmation/final approval gates, idempotent retries/concurrent overpayment prevention, reference uniqueness, rejection balance release, paid cancellation blocks, duplicate student conversion rollback, one-time concurrent enrollment, acknowledgement gating/demo labels, institution/faculty/CSRF boundaries and VDC +3 portal/selection evidence. Browser flow entered/approved a fee plan, recorded/verified a synthetic payment, approved/converted admission and checked dues/acknowledgements plus mobile layout. Desktop/mobile screenshots were inspected.
+
+Screenshot review exposed sidebar overflow after adding Finance; made the sidebar scrollable so account controls remain reachable. The full regression run passed with the fix. Website fee research found historical VIT 2025–26 values and a different disclosure, not an approved current 2026–27 fee schedule. No official amount was seeded, no real payments were made, and no live integration/deployment was performed. This increment does not complete all remaining ERP phases.
+
 ## Recurring timetable increment
 
 Final backend run: 46 PostgreSQL integration/security tests passed, 0 failures/skips, reported duration 10 seconds. Seven recurring-timetable tests use a separate disposable database/fixture to preserve independent login quotas. The strengthened date-filter/series-linkage assertion was included in this final run. Raw results: backend/tests/VHEI.IntegrationTests/TestResults/recurring-validation.trx (ignored). Backend build passed with no warnings/errors; final frontend production build passed. Discovery validator: 16 passed, 0 failed. RecurringTimetable migration applied to integration and local demo databases.

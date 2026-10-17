@@ -13,6 +13,9 @@ public class AdmissionApplication : ScopedEntity
     public Guid CreatedBy { get; set; }
     public Guid? SubmittedBy { get; set; }
     public Guid? ReviewedBy { get; set; }
+    public Guid? ApprovedBy { get; set; }
+    public string ApprovalReference { get; set; } = "";
+    public Guid? StudentId { get; set; }
     public string PolicyReference { get; set; } = "";
     public string EligibilityNote { get; set; } = "";
     public string DocumentReference { get; set; } = "";

@@ -83,7 +83,7 @@ public class AdmissionTests(CoreFixture fixture)
         Assert.Equal(HttpStatusCode.BadRequest,(await c.PostAsJsonAsync(Path(),await Request(fixture.Vdc))).StatusCode);
         Assert.Equal(HttpStatusCode.BadRequest,(await c.PostAsJsonAsync(Path(),(await Request()) with{Email="invalid",FullName=""})).StatusCode);
         Assert.Equal(before,await db.AdmissionEvents.CountAsync());
-        Assert.Equal(HttpStatusCode.BadRequest,(await c.GetAsync(Path()+"?status=Enrolled")).StatusCode);
+        Assert.Equal(HttpStatusCode.BadRequest,(await c.GetAsync(Path()+"?status=Unknown")).StatusCode);
         Assert.Equal(HttpStatusCode.BadRequest,(await c.GetAsync(Path()+"?search="+new string('a',101))).StatusCode);
     }
     [Fact] public async Task SearchAndSummaryAreScopedAndDirectEnrollmentActionDoesNotExist()

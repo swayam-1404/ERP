@@ -55,6 +55,7 @@ app.MapAuth();
 var institutionRoutes=app.MapCore();
 institutionRoutes.MapStudents(app);
 institutionRoutes.MapAdmissions(app);
+institutionRoutes.MapAdmissionFinance(app);
 institutionRoutes.MapFaculty(app);
 institutionRoutes.MapAcademics(app);
 institutionRoutes.MapRecurringTimetable(app);

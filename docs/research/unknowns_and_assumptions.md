@@ -11,7 +11,7 @@
 ## Required later, without blocking independent local work
 
 - Current grading, attendance, credit and graduation policies by programme/batch; current SAMS/OJEE/other prospectus and eligibility rules.
-- Finance fee schedules, discount/refund authority, accounting chart and receipt numbering; no actual fees verified.
+- Current fee schedules, discount/refund authority, accounting chart and statutory receipt numbering. Follow-up on 2026-10-17 verified historical VIT fee tables and conflicting disclosure figures; see FEE_SOURCE_REVIEW_2026-10-17.md. They are not activated for 2026–27.
 - Certificate issuing/signing authority, authorized document types, retention/revocation policy; QuestPDF license eligibility.
 - Current staff assignments, account owner, roles, guardian-consent model, student retention rules and privacy policies. Public role names must not become privileged accounts.
 - Branding permission; use a configurable temporary theme until permission is supplied.

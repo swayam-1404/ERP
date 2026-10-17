@@ -11,6 +11,7 @@ A running development increment in E:\ERP\VHEI-ERP using **ASP.NET Core 10, Post
 - Student creation, profile/guardian/enrollment, search/status/programme filters, pagination, version-controlled editing, audited archiving and institution-scoped CSV export.
 - Faculty directory, search, profile creation, versioned editing and audited archiving; creating a profile does not grant login permissions.
 - Admissions drafts, programme/session selection, external counselling references, tracking/totals, independent evidence review/rejection, cancellation and retained history. Review is separate from admission approval/payment/enrollment; see [API scope](docs/api/ADMISSIONS_API.md).
+- Admission finance: independently approved year-matched fee plans, charge issuance, recorded payment evidence with separate verification, payment acknowledgements/dues, final admission approval and one-time atomic student conversion. VDC +3 requires external-portal evidence and a selection reference. No live gateway, bank/SAMS integration, refunds or general ledger. [API scope](docs/api/ADMISSION_FINANCE_API.md).
 - Distinct central/institution administrator and faculty navigation. Live PostgreSQL dashboard totals and consolidated network charts.
 - 500 deterministic fictional students and 32 fictional faculty, clearly DEMO, using reserved example.test emails. Browser checks add further labelled demo records. No private student records imported.
 - Timetable periods with database-enforced room/faculty/cohort conflict detection, frozen class rosters, assigned faculty attendance, separate correction review and operational attendance reports.
@@ -19,11 +20,11 @@ A running development increment in E:\ERP\VHEI-ERP using **ASP.NET Core 10, Post
 
 ## Validation
 
-Backend build passed with no warnings/errors; 46 PostgreSQL integration/security tests and 11 Playwright browser checks passed; frontend production build passed. Coverage includes admissions, single/weekly scheduling, attendance and mobile page-width checks. Desktop/mobile screenshots were inspected. See [test results](docs/TEST_RESULTS.md). Docker service startup and production deployment were not verified.
+Backend build passed with no warnings/errors; 55 PostgreSQL integration/security tests and 13 Playwright browser checks passed; frontend production build passed. Coverage includes admissions, single/weekly scheduling, attendance and mobile page-width checks. Desktop/mobile screenshots were inspected. See [test results](docs/TEST_RESULTS.md). Docker service startup and production deployment were not verified.
 
 ## Still to build
 
-Admissions approval and payment gates; remaining core/role administration; production faculty-account provisioning; subject registrations/documents/scholarships; remaining timetable/attendance features; examinations/results; finance; marksheets/certificates; additional ERP modules; Flutter mobile; performance/restore testing; approved Hostinger staging/production deployment. No official fee/grading/certificate authority is fabricated. Missing modules have no fake success screens.
+Remaining core/role administration; official admissions eligibility/seat allocation and secure documents; refunds/withdrawals; production faculty-account provisioning; subject registrations/scholarships; remaining timetable/attendance features; examinations/results; full finance beyond the admission subledger; marksheets/certificates; additional ERP modules; Flutter mobile; performance/restore testing; reviewed Hostinger staging/production deployment. Historical published fees are documented with academic years and conflicts, not automatically activated. Missing modules have no fake success screens.
 
 ## Conflict resolutions and evidence
 

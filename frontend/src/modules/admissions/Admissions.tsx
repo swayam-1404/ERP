@@ -1,23 +1,24 @@
 import {useState} from 'react';
+import {AdmissionFinance} from '../finance/AdmissionFinance';
 import {useQuery,useQueryClient} from '@tanstack/react-query';
 import {api} from '../../services/api';
 import {Button} from '../../components/ui/button';
 import {Dialog} from '../../components/ui/dialog';
 import type {Reference} from '../../types/core';
 
-type Application={id:string;applicationNumber:string;fullName:string;email:string;programmeId:string;academicSessionId:string;externalReference:string;status:string;version:number;submittedBy:string|null;policyReference:string;eligibilityNote:string;documentReference:string;reviewNote:string};
+type Application={id:string;applicationNumber:string;fullName:string;email:string;programmeId:string;academicSessionId:string;externalReference:string;status:string;version:number;submittedBy:string|null;studentId:string|null;policyReference:string;eligibilityNote:string;documentReference:string;reviewNote:string};
 type Detail={application:Application;history:{id:string;status:string;note:string;occurredAt:string}[]};
-const statuses=['Draft','Submitted','Reviewed','Rejected','Cancelled'];
+const statuses=['Draft','Submitted','Reviewed','Approved','Enrolled','Rejected','Cancelled'];
 
 export function Admissions({institution,userId}:{institution:string;userId:string}){
  const client=useQueryClient(),base=`/institutions/${institution}/admissions`;
- const [search,setSearch]=useState(''),[status,setStatus]=useState(''),[page,setPage]=useState(1),[creating,setCreating]=useState(false),[selected,setSelected]=useState('');
+ const [search,setSearch]=useState(''),[status,setStatus]=useState(''),[page,setPage]=useState(1),[creating,setCreating]=useState(false),[selected,setSelected]=useState(()=>new URLSearchParams(window.location.search).get('application')??'');
  const reference=useQuery({queryKey:['reference',institution],queryFn:()=>api<Reference>(`/institutions/${institution}/reference`)});
  const q=useQuery({queryKey:['admissions',institution,'list',search,status,page],queryFn:()=>api<{items:Application[];total:number}>(`${base}?page=${page}&search=${encodeURIComponent(search)}${status?'&status='+status:''}`)});
  const summary=useQuery({queryKey:['admissions',institution,'summary'],queryFn:()=>api<{status:string;count:number}[]>(`${base}/summary`)});
  const refresh=()=>client.invalidateQueries({queryKey:['admissions',institution]});
  return <><div className="page-title"><div><p className="eyebrow">ADMISSIONS</p><h1>Every application, accounted for.</h1><p>Register applicants, track evidence and record independent review.</p></div><Button disabled={!reference.data?.programmes.length||!reference.data.sessions.length} onClick={()=>setCreating(true)}>New application</Button></div>
- <p className="admission-notice">Reviewed means the recorded evidence was checked by another administrator. Admission approval, fee confirmation and enrolment are still pending separate workflows.</p>
+ <p className="admission-notice">Reviewed means the evidence was checked by another administrator. A configured fee plan, confirmed payment and final approval are required before enrolment.</p>
  <div className="admission-counts" aria-label="Application totals">{statuses.map(s=><button key={s} className={status===s?'selected':''} onClick={()=>{setStatus(status===s?'':s);setPage(1)}}><strong>{summary.data?.find(x=>x.status===s)?.count??0}</strong><span>{s}</span></button>)}</div>
  <section className="panel"><div className="panel-heading"><h2>Applications</h2><span className="muted">{q.data?.total??0} matching records</span></div><div className="admission-filters"><label>Search applications<input maxLength={100} placeholder="Name, application or counselling reference" value={search} onChange={e=>{setSearch(e.target.value);setPage(1)}}/></label><label>Application status<select aria-label="Application status" value={status} onChange={e=>{setStatus(e.target.value);setPage(1)}}><option value="">All statuses</option>{statuses.map(s=><option key={s}>{s}</option>)}</select></label></div>
  {(q.error||reference.error||summary.error)&&<p role="alert" className="error">{(q.error||reference.error||summary.error)?.message}</p>}{q.isPending&&<p className="state">Loading applications…</p>}
@@ -54,6 +55,7 @@ function ApplicationDetail({base,institution,id,reference,userId,onClose,refresh
  <label>Application action<select aria-label="Application action" required value={action} onChange={e=>setAction(e.target.value)}><option value="">Choose action</option>{actions.map(s=><option key={s} value={s}>{s==='Review'?'Complete evidence review':s==='Reject'?'Reject application':s==='Cancel'?'Cancel application':'Submit for review'}</option>)}</select></label>
  {action==='Review'&&<><label>Applicable policy reference<input name="policyReference" required minLength={3} maxLength={500} placeholder="Approved policy/version and record reference"/></label><label>Eligibility evidence<textarea name="eligibilityNote" required minLength={3} maxLength={1000}/></label><label>Verified document reference<textarea name="documentReference" required minLength={3} maxLength={1000} placeholder="Identify records checked and where they are held"/></label></>}
  {action&&<><label>Action note<textarea required minLength={3} maxLength={1000} value={reason} onChange={e=>setReason(e.target.value)}/></label><Button disabled={busy}>{busy?'Saving…':'Record action'}</Button></>}{error&&<p role="alert" className="error">{error}</p>}</form>}
+ {['Reviewed','Approved','Enrolled'].includes(a.status)&&<AdmissionFinance institution={institution} application={a} userId={userId} onRefresh={refresh}/>}
  <h3>Application history</h3><ol className="admission-history">{q.data?.history.map(h=><li key={h.id}><strong>{h.status}</strong> <time>{new Date(h.occurredAt).toLocaleString('en-IN',{timeZone:'Asia/Kolkata'})}</time><p>{h.note}</p></li>)}</ol></>}
  </Dialog>{editing&&a&&<ApplicationEditor base={base} reference={reference} profile={a} onClose={()=>setEditing(false)} onSaved={async()=>{await refresh();setEditing(false)}}/>}</>;
 }

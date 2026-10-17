@@ -9,9 +9,10 @@ public record AdmissionTransition(int Version,string Action,string Reason,string
 
 public static class AdmissionEndpoints
 {
-    public static readonly string[] Statuses=["Draft","Submitted","Reviewed","Rejected","Cancelled"];
+    public static readonly string[] Statuses=["Draft","Submitted","Reviewed","Approved","Enrolled","Rejected","Cancelled"];
     private static bool Text(string? s,int min,int max)=>s!=null&&s.Trim().Length>=min&&s.Length<=max;
-    private static void Event(ErpDbContext db,AdmissionApplication a,Guid actor,string action,string note)
+    internal static async Task<AdmissionApplication?> Lock(ErpDbContext db,Guid institution,Guid id)=>(await db.AdmissionApplications.FromSqlInterpolated($"SELECT * FROM \"AdmissionApplications\" WHERE \"InstitutionId\"={institution} AND \"Id\"={id} FOR UPDATE").ToListAsync()).SingleOrDefault();
+    internal static void Event(ErpDbContext db,AdmissionApplication a,Guid actor,string action,string note)
     {
         db.AdmissionEvents.Add(new AdmissionEvent{InstitutionId=a.InstitutionId,ApplicationId=a.Id,ActorId=actor,Status=a.Status,Note=note});
         db.AuditLogs.Add(new AuditLog{InstitutionId=a.InstitutionId,ActorId=actor,Action="Admission."+action,Resource=a.Id.ToString(),Details=$"Application version {a.Version}; status {a.Status}."});
@@ -39,7 +40,8 @@ public static class AdmissionEndpoints
         routes.MapPost("/{id:guid}/transition",async(Guid institutionId,Guid id,AdmissionTransition r,HttpContext ctx,ErpDbContext db)=>
         {
             if(!Text(r.Reason,3,1000))return Results.Problem("Enter an action note of 3–1000 characters.",statusCode:400);
-            var a=await db.AdmissionApplications.SingleOrDefaultAsync(x=>x.InstitutionId==institutionId&&x.Id==id);
+            await using var tx=await db.Database.BeginTransactionAsync();
+            var a=await Lock(db,institutionId,id);
             if(a==null)return Results.NotFound();
             if(a.Version!=r.Version)return Results.Problem("Application changed. Reload before continuing.",statusCode:409);
             switch(r.Action)
@@ -51,11 +53,15 @@ public static class AdmissionEndpoints
                     a.Status=r.Action=="Review"?"Reviewed":"Rejected";a.ReviewedBy=ctx.Actor();a.ReviewNote=r.Reason.Trim();
                     if(r.Action=="Review"){a.PolicyReference=r.PolicyReference.Trim();a.EligibilityNote=r.EligibilityNote.Trim();a.DocumentReference=r.DocumentReference.Trim();}
                     break;
-                case "Cancel" when a.Status is "Draft" or "Submitted" or "Reviewed":a.Status="Cancelled";break;
+                case "Cancel" when a.Status is "Draft" or "Submitted" or "Reviewed":
+                    var charge=await db.AdmissionCharges.SingleOrDefaultAsync(x=>x.InstitutionId==institutionId&&x.ApplicationId==id);
+                    if(charge!=null){if(await db.AdmissionPayments.AnyAsync(x=>x.InstitutionId==institutionId&&x.ChargeId==charge.Id&&(x.Status=="Pending"||x.Status=="Confirmed")))return Results.Problem("Resolve pending payments and the refund/withdrawal process before cancelling. Financial history cannot be erased.",statusCode:409);charge.IsVoid=true;}
+                    a.Status="Cancelled";break;
                 default:return Results.Problem("This action is unavailable for the current application status.",statusCode:409);
             }
             a.Version++;Event(db,a,ctx.Actor(),r.Action,r.Reason.Trim());
             try{await db.SaveChangesAsync();}catch(DbUpdateConcurrencyException){return Results.Problem("Application changed. Reload before continuing.",statusCode:409);}
+            await tx.CommitAsync();
             return Results.Ok(a);
         });
     }
