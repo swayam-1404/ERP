@@ -16,6 +16,7 @@ public class Subject : ScopedEntity
 }
 public class ClassSession : ScopedEntity
 {
+    public Guid? TimetableSeriesId { get; set; }
     public Guid SubjectId { get; set; }
     public Guid ProgrammeId { get; set; }
     public Guid AcademicSessionId { get; set; }
@@ -27,6 +28,26 @@ public class ClassSession : ScopedEntity
     public DateTime EndsAt { get; set; }
     public bool IsCancelled { get; set; }
     public bool AttendanceSubmitted { get; set; }
+    public int Version { get; set; } = 1;
+    public bool IsDemo { get; set; }
+}
+public class TimetableSeries : ScopedEntity
+{
+    public string Name { get; set; } = "";
+    public DateOnly FirstDate { get; set; }
+    public DateOnly LastDate { get; set; }
+    public TimeOnly StartTime { get; set; }
+    public TimeOnly EndTime { get; set; }
+    public int[] DaysOfWeek { get; set; } = [];
+    public DateOnly[] ExcludedDates { get; set; } = [];
+    public Guid SubjectId { get; set; }
+    public Guid FacultyId { get; set; }
+    public Guid ClassroomId { get; set; }
+    public string Section { get; set; } = "";
+    public string TimeZone { get; set; } = "Asia/Kolkata";
+    public Guid CreatedBy { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public bool IsCancelled { get; set; }
     public int Version { get; set; } = 1;
     public bool IsDemo { get; set; }
 }

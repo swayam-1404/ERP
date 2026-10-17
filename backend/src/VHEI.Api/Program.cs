@@ -57,6 +57,7 @@ institutionRoutes.MapStudents(app);
 institutionRoutes.MapAdmissions(app);
 institutionRoutes.MapFaculty(app);
 institutionRoutes.MapAcademics(app);
+institutionRoutes.MapRecurringTimetable(app);
 app.MapGet("/api/v1/overview",async(HttpContext ctx,ErpDbContext db)=>{
     var assigned=await db.InstitutionAssignments.Where(x=>x.UserId==ctx.Actor()).Select(x=>x.InstitutionId).ToListAsync();
     return Results.Ok(new{students=await db.Students.CountAsync(x=>assigned.Contains(x.InstitutionId)&&x.Status!="Archived"),institutions=assigned.Count,faculty=await db.Faculty.CountAsync(x=>assigned.Contains(x.InstitutionId)&&!x.IsArchived),byInstitution=await db.Institutions.Where(x=>assigned.Contains(x.Id)).OrderBy(x=>x.Code).Select(x=>new{name=x.Code,students=db.Students.Count(s=>s.InstitutionId==x.Id&&s.Status!="Archived")}).ToListAsync()});

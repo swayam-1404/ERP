@@ -508,6 +508,9 @@ namespace VHEI.Infrastructure.Migrations
                     b.Property<Guid>("SubjectId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("TimetableSeriesId")
+                        .HasColumnType("uuid");
+
                     b.Property<int>("Version")
                         .IsConcurrencyToken()
                         .HasColumnType("integer");
@@ -517,6 +520,8 @@ namespace VHEI.Infrastructure.Migrations
                     b.HasIndex("InstitutionId", "ClassroomId");
 
                     b.HasIndex("InstitutionId", "FacultyId");
+
+                    b.HasIndex("InstitutionId", "TimetableSeriesId");
 
                     b.HasIndex("InstitutionId", "SubjectId", "ProgrammeId", "AcademicSessionId", "Semester");
 
@@ -887,14 +892,93 @@ namespace VHEI.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasAlternateKey("InstitutionId", "Id");
-
                     b.HasIndex("InstitutionId", "AcademicSessionId");
 
                     b.HasIndex("InstitutionId", "ProgrammeId", "AcademicSessionId", "Code")
                         .IsUnique();
 
                     b.ToTable("Subjects");
+                });
+
+            modelBuilder.Entity("VHEI.Domain.TimetableSeries", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ClassroomId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
+
+                    b.PrimitiveCollection<int[]>("DaysOfWeek")
+                        .IsRequired()
+                        .HasColumnType("integer[]");
+
+                    b.Property<TimeOnly>("EndTime")
+                        .HasColumnType("time without time zone");
+
+                    b.PrimitiveCollection<DateOnly[]>("ExcludedDates")
+                        .IsRequired()
+                        .HasColumnType("date[]");
+
+                    b.Property<Guid>("FacultyId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateOnly>("FirstDate")
+                        .HasColumnType("date");
+
+                    b.Property<Guid>("InstitutionId")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("IsCancelled")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsDemo")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateOnly>("LastDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("character varying(120)");
+
+                    b.Property<string>("Section")
+                        .IsRequired()
+                        .HasMaxLength(12)
+                        .HasColumnType("character varying(12)");
+
+                    b.Property<TimeOnly>("StartTime")
+                        .HasColumnType("time without time zone");
+
+                    b.Property<Guid>("SubjectId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("TimeZone")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Version")
+                        .IsConcurrencyToken()
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InstitutionId", "ClassroomId");
+
+                    b.HasIndex("InstitutionId", "CreatedAt");
+
+                    b.HasIndex("InstitutionId", "FacultyId");
+
+                    b.HasIndex("InstitutionId", "SubjectId");
+
+                    b.ToTable("TimetableSeries");
                 });
 
             modelBuilder.Entity("VHEI.Infrastructure.ErpUser", b =>
@@ -1151,6 +1235,12 @@ namespace VHEI.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("VHEI.Domain.TimetableSeries", null)
+                        .WithMany()
+                        .HasForeignKey("InstitutionId", "TimetableSeriesId")
+                        .HasPrincipalKey("InstitutionId", "Id")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("VHEI.Domain.Subject", null)
                         .WithMany()
                         .HasForeignKey("InstitutionId", "SubjectId", "ProgrammeId", "AcademicSessionId", "Semester")
@@ -1300,6 +1390,36 @@ namespace VHEI.Infrastructure.Migrations
                     b.HasOne("VHEI.Domain.Programme", null)
                         .WithMany()
                         .HasForeignKey("InstitutionId", "ProgrammeId")
+                        .HasPrincipalKey("InstitutionId", "Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("VHEI.Domain.TimetableSeries", b =>
+                {
+                    b.HasOne("VHEI.Domain.Institution", null)
+                        .WithMany()
+                        .HasForeignKey("InstitutionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("VHEI.Domain.Classroom", null)
+                        .WithMany()
+                        .HasForeignKey("InstitutionId", "ClassroomId")
+                        .HasPrincipalKey("InstitutionId", "Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("VHEI.Domain.Faculty", null)
+                        .WithMany()
+                        .HasForeignKey("InstitutionId", "FacultyId")
+                        .HasPrincipalKey("InstitutionId", "Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("VHEI.Domain.Subject", null)
+                        .WithMany()
+                        .HasForeignKey("InstitutionId", "SubjectId")
                         .HasPrincipalKey("InstitutionId", "Id")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();

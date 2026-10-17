@@ -25,12 +25,22 @@ public class ErpDbContext(DbContextOptions<ErpDbContext> options) : IdentityDbCo
     public DbSet<Classroom> Classrooms => Set<Classroom>();
     public DbSet<Subject> Subjects => Set<Subject>();
     public DbSet<ClassSession> ClassSessions => Set<ClassSession>();
+    public DbSet<TimetableSeries> TimetableSeries => Set<TimetableSeries>();
     public DbSet<ClassRoster> ClassRosters => Set<ClassRoster>();
     public DbSet<AttendanceRecord> AttendanceRecords => Set<AttendanceRecord>();
     public DbSet<AttendanceCorrection> AttendanceCorrections => Set<AttendanceCorrection>();
     protected override void OnModelCreating(ModelBuilder model)
     {
         base.OnModelCreating(model);
+        ConfigureScoped<TimetableSeries>(model);
+        model.Entity<TimetableSeries>().Property(x=>x.Version).IsConcurrencyToken();
+        model.Entity<TimetableSeries>().Property(x=>x.Name).HasMaxLength(120);
+        model.Entity<TimetableSeries>().Property(x=>x.Section).HasMaxLength(12);
+        model.Entity<TimetableSeries>().HasIndex(x=>new{x.InstitutionId,x.CreatedAt});
+        model.Entity<TimetableSeries>().HasOne<Subject>().WithMany().HasForeignKey(x=>new{x.InstitutionId,x.SubjectId}).HasPrincipalKey(x=>new{x.InstitutionId,x.Id}).OnDelete(DeleteBehavior.Restrict);
+        model.Entity<TimetableSeries>().HasOne<Faculty>().WithMany().HasForeignKey(x=>new{x.InstitutionId,x.FacultyId}).HasPrincipalKey(x=>new{x.InstitutionId,x.Id}).OnDelete(DeleteBehavior.Restrict);
+        model.Entity<TimetableSeries>().HasOne<Classroom>().WithMany().HasForeignKey(x=>new{x.InstitutionId,x.ClassroomId}).HasPrincipalKey(x=>new{x.InstitutionId,x.Id}).OnDelete(DeleteBehavior.Restrict);
+        model.Entity<ClassSession>().HasOne<TimetableSeries>().WithMany().HasForeignKey(x=>new{x.InstitutionId,x.TimetableSeriesId}).HasPrincipalKey(x=>new{x.InstitutionId,x.Id}).OnDelete(DeleteBehavior.Restrict);
         ConfigureScoped<AdmissionApplication>(model);ConfigureScoped<AdmissionEvent>(model);
         model.Entity<AdmissionApplication>().HasIndex(x=>new{x.InstitutionId,x.ApplicationNumber}).IsUnique();
         model.Entity<AdmissionApplication>().HasIndex(x=>new{x.InstitutionId,x.Status,x.CreatedAt});

@@ -1,5 +1,11 @@
 # Executed test results — 2026-10-17
 
+## Recurring timetable increment
+
+Final backend run: 46 PostgreSQL integration/security tests passed, 0 failures/skips, reported duration 10 seconds. Seven recurring-timetable tests use a separate disposable database/fixture to preserve independent login quotas. The strengthened date-filter/series-linkage assertion was included in this final run. Raw results: backend/tests/VHEI.IntegrationTests/TestResults/recurring-validation.trx (ignored). Backend build passed with no warnings/errors; final frontend production build passed. Discovery validator: 16 passed, 0 failed. RecurringTimetable migration applied to integration and local demo databases.
+
+Full browser suite: 11 passed, 0 failed (reported 1.2 minutes). After screenshot inspection, preview results were given focus to bring them into view inside long dialogs; the two affected weekly-series browser tests were rerun and both passed (5.9 seconds). Desktop preview/cancellation and mobile conflict screenshots were inspected. No final failing tests. Cases and remaining scope: testing/RECURRING_TIMETABLE.md. No new runtime packages, official holiday/eligibility rules, external messages or production deployment. GitHub CI status is not inferred from local checks.
+
 ## Admissions increment
 
 Backend: 39 real-PostgreSQL integration/security tests passed, 0 failures/skips (23 seconds in the final run), including eight new admissions tests. The original student/faculty/attendance/security checks passed alongside the new cases. Raw result: backend/tests/VHEI.IntegrationTests/TestResults/admissions-validation.trx (ignored). Frontend production build passed after the final accessibility/layout changes. Discovery consistency: 16 passed, 0 failed. The AdmissionIntake migration applied successfully to disposable integration databases and the local demo database.

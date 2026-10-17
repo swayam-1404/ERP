@@ -14,11 +14,12 @@ A running development increment in E:\ERP\VHEI-ERP using **ASP.NET Core 10, Post
 - Distinct central/institution administrator and faculty navigation. Live PostgreSQL dashboard totals and consolidated network charts.
 - 500 deterministic fictional students and 32 fictional faculty, clearly DEMO, using reserved example.test emails. Browser checks add further labelled demo records. No private student records imported.
 - Timetable periods with database-enforced room/faculty/cohort conflict detection, frozen class rosters, assigned faculty attendance, separate correction review and operational attendance reports.
+- Weekly series with IST date preview, selected weekdays/skipped dates, atomic conflict-safe creation, future-remainder cancellation and class date filtering. Saved attendance and rosters remain intact.
 - EF migrations, local start/stop scripts, pinned dependency lock, CI and Docker/Nginx preparation.
 
 ## Validation
 
-Backend build passed with no warnings/errors; 39 PostgreSQL integration/security tests passed; frontend production build passed; Browser checks cover the original core plus the teaching workflow; see the current test report, including mobile page-width checks. Desktop/mobile screenshots were inspected. See [test results](docs/TEST_RESULTS.md). Docker service startup and production deployment were not verified.
+Backend build passed with no warnings/errors; 46 PostgreSQL integration/security tests and 11 Playwright browser checks passed; frontend production build passed. Coverage includes admissions, single/weekly scheduling, attendance and mobile page-width checks. Desktop/mobile screenshots were inspected. See [test results](docs/TEST_RESULTS.md). Docker service startup and production deployment were not verified.
 
 ## Still to build
 

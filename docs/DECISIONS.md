@@ -1,5 +1,9 @@
 # Decisions
 
+## Recurring timetable — 2026-10-17
+
+D021: materialize bounded weekly series as real dated periods, using the existing PostgreSQL exclusions and saved-roster attendance model. Preview is advisory; a creation conflict rolls back every generated row. D022: use explicit fixed IST for date expansion, manual skip dates and no inferred official holidays. D023: lock the series and its classes for versioned future-remainder cancellation; preserve past/submitted classes and all rosters. Template rescheduling remains a later feature.
+
 ## Admissions increment — 2026-10-17
 
 D018: distinguish evidence review from final admission approval/payment/enrollment. Reviewed applications never automatically create students or confirm fees. D019: lock submitted applicant details and require a different submitting/reviewing administrator, with version concurrency and transactionally retained history. D020: document verification records external evidence references only until secure uploads and approved eligibility policies exist; do not manufacture official rules.
