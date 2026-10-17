@@ -1,5 +1,9 @@
 # Decisions
 
+## Admissions increment — 2026-10-17
+
+D018: distinguish evidence review from final admission approval/payment/enrollment. Reviewed applications never automatically create students or confirm fees. D019: lock submitted applicant details and require a different submitting/reviewing administrator, with version concurrency and transactionally retained history. D020: document verification records external evidence references only until secure uploads and approved eligibility policies exist; do not manufacture official rules.
+
 | ID | Decision | Status and rationale |
 |---|---|---|
 | D001 | Follow discovery acceptance gate before implementation | Required by supplied master prompt; pending user review |

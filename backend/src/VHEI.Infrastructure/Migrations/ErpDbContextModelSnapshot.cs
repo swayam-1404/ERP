@@ -176,6 +176,134 @@ namespace VHEI.Infrastructure.Migrations
                     b.ToTable("AcademicSessions");
                 });
 
+            modelBuilder.Entity("VHEI.Domain.AdmissionApplication", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("AcademicSessionId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ApplicationNumber")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("character varying(40)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("DocumentReference")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("EligibilityNote")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(254)
+                        .HasColumnType("character varying(254)");
+
+                    b.Property<string>("ExternalReference")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("character varying(120)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("character varying(120)");
+
+                    b.Property<Guid>("InstitutionId")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("IsDemo")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("PolicyReference")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("ProgrammeId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ReviewNote")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("ReviewedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("SubmittedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Version")
+                        .IsConcurrencyToken()
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InstitutionId", "AcademicSessionId");
+
+                    b.HasIndex("InstitutionId", "ApplicationNumber")
+                        .IsUnique();
+
+                    b.HasIndex("InstitutionId", "ProgrammeId");
+
+                    b.HasIndex("InstitutionId", "Status", "CreatedAt");
+
+                    b.ToTable("AdmissionApplications", t =>
+                        {
+                            t.HasCheckConstraint("CK_Admission_Review", "\"Status\" NOT IN ('Reviewed','Rejected') OR (\"ReviewedBy\" IS NOT NULL AND \"SubmittedBy\" IS NOT NULL AND \"ReviewedBy\" <> \"SubmittedBy\")");
+
+                            t.HasCheckConstraint("CK_Admission_Status", "\"Status\" IN ('Draft','Submitted','Reviewed','Rejected','Cancelled')");
+                        });
+                });
+
+            modelBuilder.Entity("VHEI.Domain.AdmissionEvent", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ActorId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ApplicationId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("InstitutionId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Note")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("OccurredAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasAlternateKey("InstitutionId", "Id");
+
+                    b.HasIndex("InstitutionId", "ApplicationId");
+
+                    b.ToTable("AdmissionEvents");
+                });
+
             modelBuilder.Entity("VHEI.Domain.AttendanceCorrection", b =>
                 {
                     b.Property<Guid>("Id")
@@ -894,6 +1022,45 @@ namespace VHEI.Infrastructure.Migrations
                     b.HasOne("VHEI.Domain.Institution", null)
                         .WithMany()
                         .HasForeignKey("InstitutionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("VHEI.Domain.AdmissionApplication", b =>
+                {
+                    b.HasOne("VHEI.Domain.Institution", null)
+                        .WithMany()
+                        .HasForeignKey("InstitutionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("VHEI.Domain.AcademicSession", null)
+                        .WithMany()
+                        .HasForeignKey("InstitutionId", "AcademicSessionId")
+                        .HasPrincipalKey("InstitutionId", "Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("VHEI.Domain.Programme", null)
+                        .WithMany()
+                        .HasForeignKey("InstitutionId", "ProgrammeId")
+                        .HasPrincipalKey("InstitutionId", "Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("VHEI.Domain.AdmissionEvent", b =>
+                {
+                    b.HasOne("VHEI.Domain.Institution", null)
+                        .WithMany()
+                        .HasForeignKey("InstitutionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("VHEI.Domain.AdmissionApplication", null)
+                        .WithMany()
+                        .HasForeignKey("InstitutionId", "ApplicationId")
+                        .HasPrincipalKey("InstitutionId", "Id")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

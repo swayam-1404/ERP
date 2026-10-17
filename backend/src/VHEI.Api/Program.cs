@@ -54,6 +54,7 @@ if(seedMode is "Demo" or "Reference")
 app.MapAuth();
 var institutionRoutes=app.MapCore();
 institutionRoutes.MapStudents(app);
+institutionRoutes.MapAdmissions(app);
 institutionRoutes.MapFaculty(app);
 institutionRoutes.MapAcademics(app);
 app.MapGet("/api/v1/overview",async(HttpContext ctx,ErpDbContext db)=>{

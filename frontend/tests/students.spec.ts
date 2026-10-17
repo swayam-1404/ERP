@@ -1,7 +1,6 @@
 import {test,expect} from '@playwright/test';
 import fs from 'node:fs';
-const password=fs.readFileSync(new URL('../../.env',import.meta.url),'utf8').match(/^Seed__AdminPassword=(.+)$/m)![1].trim();
-async function signIn(page:import('@playwright/test').Page,email='admin@example.test'){await page.goto('/');await page.getByLabel('Email address').fill(email);await page.getByLabel('Password',{exact:true}).fill(password);await page.getByRole('button',{name:'Sign in',exact:true}).click();await expect(page.getByRole('heading',{name:email.startsWith('faculty')?'Your academic workspace.':'A clearer view of your campus.'})).toBeVisible();}
+import {signIn} from './login';
 test('student creation, search, profile edit, export and audited archive',async({page})=>{
  await signIn(page);await page.getByRole('link',{name:'Students',exact:true}).click();await page.getByRole('button',{name:'Add student'}).click();
  const dialog=page.getByRole('dialog',{name:'Add student',exact:true});const number='BROWSER-'+Date.now();

@@ -1,6 +1,18 @@
-# Executed test results — 2026-10-14
+# Executed test results — 2026-10-17
 
-## Final checks
+## Admissions increment
+
+Backend: 39 real-PostgreSQL integration/security tests passed, 0 failures/skips (23 seconds in the final run), including eight new admissions tests. The original student/faculty/attendance/security checks passed alongside the new cases. Raw result: backend/tests/VHEI.IntegrationTests/TestResults/admissions-validation.trx (ignored). Frontend production build passed after the final accessibility/layout changes. Discovery consistency: 16 passed, 0 failed. The AdmissionIntake migration applied successfully to disposable integration databases and the local demo database.
+
+Final full Playwright run: 9 passed, 0 failed (reported 1.2 minutes), including both admissions checks and all seven existing core/teaching checks. Runtime API readiness returned ready and the web app remained available on localhost. GitHub CI is not inferred from these local results.
+
+Browser checks add application registration/edit/submission, independent evidence review/cancellation, persisted history after reload and a 390px mobile filter/empty-state page-width check. Desktop, history and mobile admissions screenshots were inspected under testing/screenshots/admissions-*.png and admission-history.png. See testing/ADMISSIONS_INCREMENT.md and api/ADMISSIONS_API.md for scope and limitations.
+
+Earlier failures: the concurrent duplicate test compared an original mixed-case generated number against the intended uppercase stored value; corrected the expectation, then the full backend suite passed. The first browser run passed eight checks and failed the mobile status selector's exact accessible name; added an explicit aria-label and both admissions browser tests passed in a focused rerun. The full suite was rerun after consolidating login helpers to wait only on actual 429 responses from the unchanged production-default limiter, so growth of the test suite does not require weakening authentication controls. Authentication errors other than rate limiting still fail immediately.
+
+No new runtime dependencies, official policies, real institutional records, payment processing or production deployments were introduced. Earlier dependency scan results below are dated historical checks, not a fresh vulnerability scan.
+
+## Earlier teaching/core checks — 2026-10-14
 
 | Check | Actual result |
 |---|---|

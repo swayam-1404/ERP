@@ -20,6 +20,8 @@ public class ErpDbContext(DbContextOptions<ErpDbContext> options) : IdentityDbCo
     public DbSet<Student> Students => Set<Student>();
     public DbSet<Enrollment> Enrollments => Set<Enrollment>();
     public DbSet<Faculty> Faculty => Set<Faculty>();
+    public DbSet<AdmissionApplication> AdmissionApplications => Set<AdmissionApplication>();
+    public DbSet<AdmissionEvent> AdmissionEvents => Set<AdmissionEvent>();
     public DbSet<Classroom> Classrooms => Set<Classroom>();
     public DbSet<Subject> Subjects => Set<Subject>();
     public DbSet<ClassSession> ClassSessions => Set<ClassSession>();
@@ -29,6 +31,21 @@ public class ErpDbContext(DbContextOptions<ErpDbContext> options) : IdentityDbCo
     protected override void OnModelCreating(ModelBuilder model)
     {
         base.OnModelCreating(model);
+        ConfigureScoped<AdmissionApplication>(model);ConfigureScoped<AdmissionEvent>(model);
+        model.Entity<AdmissionApplication>().HasIndex(x=>new{x.InstitutionId,x.ApplicationNumber}).IsUnique();
+        model.Entity<AdmissionApplication>().HasIndex(x=>new{x.InstitutionId,x.Status,x.CreatedAt});
+        model.Entity<AdmissionApplication>().Property(x=>x.Version).IsConcurrencyToken();
+        model.Entity<AdmissionApplication>().Property(x=>x.ApplicationNumber).HasMaxLength(40);
+        model.Entity<AdmissionApplication>().Property(x=>x.FullName).HasMaxLength(120);
+        model.Entity<AdmissionApplication>().Property(x=>x.Email).HasMaxLength(254);
+        model.Entity<AdmissionApplication>().Property(x=>x.ExternalReference).HasMaxLength(120);
+        model.Entity<AdmissionApplication>().HasOne<Programme>().WithMany().HasForeignKey(x=>new{x.InstitutionId,x.ProgrammeId}).HasPrincipalKey(x=>new{x.InstitutionId,x.Id}).OnDelete(DeleteBehavior.Restrict);
+        model.Entity<AdmissionApplication>().HasOne<AcademicSession>().WithMany().HasForeignKey(x=>new{x.InstitutionId,x.AcademicSessionId}).HasPrincipalKey(x=>new{x.InstitutionId,x.Id}).OnDelete(DeleteBehavior.Restrict);
+        model.Entity<AdmissionApplication>().ToTable(t=>{
+            t.HasCheckConstraint("CK_Admission_Status","\"Status\" IN ('Draft','Submitted','Reviewed','Rejected','Cancelled')");
+            t.HasCheckConstraint("CK_Admission_Review","\"Status\" NOT IN ('Reviewed','Rejected') OR (\"ReviewedBy\" IS NOT NULL AND \"SubmittedBy\" IS NOT NULL AND \"ReviewedBy\" <> \"SubmittedBy\")");
+        });
+        model.Entity<AdmissionEvent>().HasOne<AdmissionApplication>().WithMany().HasForeignKey(x=>new{x.InstitutionId,x.ApplicationId}).HasPrincipalKey(x=>new{x.InstitutionId,x.Id}).OnDelete(DeleteBehavior.Restrict);
         model.Entity<Institution>().HasIndex(x => x.Code).IsUnique();
         model.Entity<Institution>().Property(x => x.Code).HasMaxLength(24);
         model.Entity<Institution>().Property(x => x.Name).HasMaxLength(250);

@@ -1,7 +1,6 @@
 import {test,expect} from '@playwright/test';
-import fs from 'node:fs';
-const password=fs.readFileSync(new URL('../../.env',import.meta.url),'utf8').match(/^Seed__AdminPassword=(.+)$/m)![1].trim();
-async function login(page:import('@playwright/test').Page,email:string){await page.goto('/');await page.getByLabel('Email address').fill(email);await page.getByLabel('Password',{exact:true}).fill(password);await page.getByRole('button',{name:'Sign in',exact:true}).click();await expect(page.getByRole('heading',{name:email.startsWith('faculty')?'Your academic workspace.':'A clearer view of your campus.'})).toBeVisible();await page.getByRole('link',{name:'Timetable & attendance',exact:true}).click();}
+import {signIn} from './login';
+async function login(page:import('@playwright/test').Page,email:string){await signIn(page,email);await page.getByRole('link',{name:'Timetable & attendance',exact:true}).click();}
 test('schedule class, submit as assigned faculty and approve a correction as administrator',async({page})=>{
  await login(page,'admin@example.test');const selected=await page.getByLabel('Select institution').inputValue();const config=await(await page.request.get(`/api/v1/institutions/${selected}/academic/configuration`)).json();const subject=config.subjects[0];
  // Use a one-minute period yesterday so attendance is eligible to be recorded.

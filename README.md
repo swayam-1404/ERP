@@ -10,6 +10,7 @@ A running development increment in E:\ERP\VHEI-ERP using **ASP.NET Core 10, Post
 - Eight source-backed institutional references, programme/department views, assigned institution selection, local department creation and audit trail.
 - Student creation, profile/guardian/enrollment, search/status/programme filters, pagination, version-controlled editing, audited archiving and institution-scoped CSV export.
 - Faculty directory, search, profile creation, versioned editing and audited archiving; creating a profile does not grant login permissions.
+- Admissions drafts, programme/session selection, external counselling references, tracking/totals, independent evidence review/rejection, cancellation and retained history. Review is separate from admission approval/payment/enrollment; see [API scope](docs/api/ADMISSIONS_API.md).
 - Distinct central/institution administrator and faculty navigation. Live PostgreSQL dashboard totals and consolidated network charts.
 - 500 deterministic fictional students and 32 fictional faculty, clearly DEMO, using reserved example.test emails. Browser checks add further labelled demo records. No private student records imported.
 - Timetable periods with database-enforced room/faculty/cohort conflict detection, frozen class rosters, assigned faculty attendance, separate correction review and operational attendance reports.
@@ -17,7 +18,7 @@ A running development increment in E:\ERP\VHEI-ERP using **ASP.NET Core 10, Post
 
 ## Validation
 
-Backend build passed with no warnings/errors; 31 PostgreSQL integration/security tests passed; frontend production build passed; Browser checks cover the original core plus the teaching workflow; see the current test report, including mobile page-width checks. Desktop/mobile screenshots were inspected. See [test results](docs/TEST_RESULTS.md). Docker service startup and production deployment were not verified.
+Backend build passed with no warnings/errors; 39 PostgreSQL integration/security tests passed; frontend production build passed; Browser checks cover the original core plus the teaching workflow; see the current test report, including mobile page-width checks. Desktop/mobile screenshots were inspected. See [test results](docs/TEST_RESULTS.md). Docker service startup and production deployment were not verified.
 
 ## Still to build
 
@@ -31,4 +32,4 @@ Phase 0 accepted for implementation by the user's 2026-10-14 follow-up. [Conflic
 
 From this folder in PowerShell, run ./scripts/Start-Development.ps1. New Windows checkouts can run ./scripts/Initialize-Development.ps1 after installing Node 24 and Git; see the guide for prerequisites and validation limitations. Docker Desktop was unavailable, so official local PostgreSQL binaries provide the tested runtime. The API/database are localhost only.
 
-Seed modes: None, Reference, Demo. Demo is forbidden outside Development. Reset command is supplied with an explicit local-target/confirmation guard; it has not been executed against this working dataset. No live deployment, DNS, payment processing or institutional website changes performed.
+Seed modes: None, Reference, Demo. Demo is forbidden outside Development. The reset script needs updated teaching/admission dependency cleanup and isolated rehearsal before use; do not run it against this working dataset. No live deployment, DNS, payment processing or institutional website changes performed.
