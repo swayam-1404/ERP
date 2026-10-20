@@ -12,7 +12,7 @@ public static class FacultyEndpoints
         {
             var p=Math.Clamp(page??1,1,10000);var query=db.Faculty.Where(x=>x.InstitutionId==institutionId&&!x.IsArchived);if(!string.IsNullOrWhiteSpace(search)){if(search.Length>100)return Results.Problem("Search too long.",statusCode:400);query=query.Where(x=>EF.Functions.ILike(x.FullName,"%"+search+"%"));}
             return Results.Ok(new{items=await query.OrderBy(x=>x.FullName).Skip((p-1)*20).Take(20).ToListAsync(),total=await query.CountAsync(),page=p,pageSize=20});
-        });
+        }).RequireAuthorization("Teaching");
         group.MapPost("/faculty",async(Guid institutionId,FacultyRequest r,HttpContext ctx,ErpDbContext db)=>
         {
             if(string.IsNullOrWhiteSpace(r.FullName)||r.FullName.Length>120||!StudentEndpoints.EmailValid(r.Email)||string.IsNullOrWhiteSpace(r.Designation)||r.Designation.Length>120)return Results.Problem("Enter a valid name, email and designation (up to 120 characters).",statusCode:400);

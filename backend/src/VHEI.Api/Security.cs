@@ -9,6 +9,7 @@ public class InstitutionAccessFilter(ErpDbContext db) : IEndpointFilter
     {
         var route = context.HttpContext.Request.RouteValues["institutionId"]?.ToString();
         if (!Guid.TryParse(route, out var institutionId) || !Guid.TryParse(context.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier),out var userId)) return Results.Unauthorized();
+        if(await db.Users.AnyAsync(x=>x.Id==userId&&x.MustChangePassword))return Results.Problem("Change your temporary password before opening the workspace.",statusCode:403);
         if (!await db.InstitutionAssignments.AnyAsync(x => x.InstitutionId == institutionId && x.UserId == userId, context.HttpContext.RequestAborted)) return Results.Problem("Access to this institution is not assigned.", statusCode:403);
         return await next(context);
     }

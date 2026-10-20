@@ -37,9 +37,9 @@ public static class ReferenceSeed
         }
         if (!demo) return;
         if (string.IsNullOrWhiteSpace(password)) throw new InvalidOperationException("Seed__AdminPassword is required for development account creation.");
-        foreach(var role in new[] { "CentralAdministrator", "InstitutionAdministrator", "Faculty" }) if (!await roles.RoleExistsAsync(role)) await roles.CreateAsync(new IdentityRole<Guid>(role));
+        foreach(var role in new[] { "CentralAdministrator", "InstitutionAdministrator", "Faculty", "Student", "Guardian" }) if (!await roles.RoleExistsAsync(role)) await roles.CreateAsync(new IdentityRole<Guid>(role));
         var all = await db.Institutions.ToListAsync();
-        foreach(var entry in new[] { ("admin@example.test", "Demo Central Administrator", "CentralAdministrator"), ("institution@example.test", "Demo VIT Administrator", "InstitutionAdministrator"), ("faculty@example.test", "Demo Faculty Member", "Faculty") })
+        foreach(var entry in new[] { ("admin@example.test", "Demo Central Administrator", "CentralAdministrator"), ("institution@example.test", "Demo VIT Administrator", "InstitutionAdministrator"), ("faculty@example.test", "Demo Faculty Member", "Faculty"), ("student@example.test", "Demo Student Portal", "Student"), ("guardian@example.test", "Demo Guardian Portal", "Guardian") })
         {
             var user = await users.FindByEmailAsync(entry.Item1);
             if (user == null)

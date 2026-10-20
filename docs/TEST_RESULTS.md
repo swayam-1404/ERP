@@ -1,4 +1,12 @@
-# Executed test results — 2026-10-17
+# Executed test results — 2026-10-20
+## Portals, examinations and academic documents — 2026-10-20
+
+Full Playwright suite: 16 passed, 0 failed (6.3 minutes). The examination/document browser workflow was then strengthened with anonymous verification, local PDF fingerprint matching and invalid-link handling, and passed again in a focused run (1 test, 1.1 minutes). Browser coverage includes including portal account lifecycle, exam publication and document request/approval/download/revocation. Final real-PostgreSQL suite: 78 passed, 0 failed/skipped, process exit 0 (3 minutes 57 seconds). Includes seven portal, nine examination/calculation and seven document tests in addition to the previous 55 checks. Backend build passed with no warnings/errors; final frontend production build passed. Raw ignored backend result: backend/tests/VHEI.IntegrationTests/TestResults/final-78-validation.trx. Migrations StudentGuardianPortal, ExaminationsResults and AcademicCertificates applied to disposable test databases and the local demo database.
+
+Portal/exam/document coverage and PDF review are detailed in testing/PORTALS_EXAMS_CERTIFICATES.md. The four-page stress PDF retained all 18 subject labels and was visually inspected after Poppler rendering. Unsupported scripts fail closed. Initial PDF image decoding failed and was fixed using vector QR modules. A first full run passed its 78 test bodies but failed database cleanup; bounded fixture parallelism and a 120-second database command allowance resolved it. That unsuccessful run is not counted as the final clean validation.
+
+Current dependency audits: no known vulnerable backend direct/transitive packages across all five projects; npm production audit found 0 vulnerabilities. PDFsharp's older vulnerable transitive cryptography minimum is explicitly overridden by patched System.Security.Cryptography.Pkcs 10.0.13. Discovery validator: 16 passed, 0 failed. These are time-specific local checks; remote CI and production readiness are not inferred.
+
 
 ## Admission finance and conversion increment
 
@@ -50,7 +58,7 @@ Initial OpenTelemetry 1.15 restore rejected a known advisory; versions updated t
 
 ## Not executed / not complete
 
-Docker image/service startup; GitHub Actions remote run; Hostinger specs/staging/deployment; full clean-machine bootstrap and demo reset rehearsal; finance/marks/documents/certificate/PDF tests; attendance concurrency; Flutter device/emulator; broad accessibility audit; load/capacity measurement; encrypted backup/restore/rollback. No performance or production-readiness claims made.
+Docker image/service startup; GitHub Actions remote run; Hostinger specs/staging/deployment; full clean-machine bootstrap and demo reset rehearsal; full financial ledger, official certificate signing and production document acceptance; Flutter device/emulator; broad accessibility audit; load/capacity measurement; encrypted backup/restore/rollback. No performance or production-readiness claims made.
 
 Final package vulnerability scan: dotnet list package --vulnerable --include-transitive reported no vulnerable packages in all five projects against the current NuGet sources. Final discovery consistency validator: 16 passed, 0 failed. Pinned npm lock reproduced by npm ci --dry-run --ignore-scripts. These checks are time-specific dependency results, not a full security audit.
 

@@ -26,7 +26,7 @@ builder.Services.AddAuthorization(options=>{
     options.AddPolicy("Teaching",policy=>policy.RequireRole("CentralAdministrator","InstitutionAdministrator","Faculty"));
 });
 bool appIsDev()=>builder.Environment.IsDevelopment();
-builder.Services.AddRateLimiter(options=>{options.RejectionStatusCode=429;options.AddPolicy("login",ctx=>RateLimitPartition.GetFixedWindowLimiter(ctx.Connection.RemoteIpAddress?.ToString()??"unknown",_=>new FixedWindowRateLimiterOptions{PermitLimit=Math.Clamp(builder.Configuration.GetValue<int?>("RateLimiting:LoginPermitLimit")??10,1,50),Window=TimeSpan.FromMinutes(1),QueueLimit=0}));});
+builder.Services.AddRateLimiter(options=>{options.RejectionStatusCode=429;options.AddPolicy("verification",ctx=>RateLimitPartition.GetFixedWindowLimiter(ctx.Connection.RemoteIpAddress?.ToString()??"unknown",_=>new FixedWindowRateLimiterOptions{PermitLimit=30,Window=TimeSpan.FromMinutes(1),QueueLimit=0}));options.AddPolicy("login",ctx=>RateLimitPartition.GetFixedWindowLimiter(ctx.Connection.RemoteIpAddress?.ToString()??"unknown",_=>new FixedWindowRateLimiterOptions{PermitLimit=Math.Clamp(builder.Configuration.GetValue<int?>("RateLimiting:LoginPermitLimit")??10,1,50),Window=TimeSpan.FromMinutes(1),QueueLimit=0}));});
 var app = builder.Build();
 app.UseExceptionHandler();
 app.UseSerilogRequestLogging();
@@ -34,6 +34,7 @@ app.UseRateLimiter();
 app.UseAuthentication();
 app.UseAuthorization();
 app.Use(async(ctx,next)=>{
+    if(ctx.Request.Path.StartsWithSegments("/api")&&ctx.Request.Path.Value?.Contains("/certificates")==true)ctx.Response.Headers.CacheControl="no-store";
     if(ctx.Request.Path.StartsWithSegments("/api")&&ctx.Request.Method is not ("GET" or "HEAD" or "OPTIONS"))
     {
         try {await ctx.RequestServices.GetRequiredService<IAntiforgery>().ValidateRequestAsync(ctx);} catch(AntiforgeryValidationException){await Results.Problem("Antiforgery token is missing or invalid.",statusCode:400).ExecuteAsync(ctx);return;}
@@ -50,11 +51,15 @@ if(seedMode is "Demo" or "Reference")
     await ReferenceSeed.RunAsync(db,Path.Combine(AppContext.BaseDirectory,"reference-data.json"),seedMode=="Demo",scope.ServiceProvider.GetRequiredService<UserManager<ErpUser>>(),scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>(),builder.Configuration["Seed:AdminPassword"]);
     if(seedMode=="Demo")await DemoSeed.RunAsync(db);
     if(seedMode=="Demo")await AcademicDemoSeed.RunAsync(db);
+    if(seedMode=="Demo")await PortalDemoSeed.RunAsync(db);
 }
 app.MapAuth();
 var institutionRoutes=app.MapCore();
 institutionRoutes.MapStudents(app);
 institutionRoutes.MapAdmissions(app);
+institutionRoutes.MapPortal(app);
+institutionRoutes.MapExaminations(app);
+institutionRoutes.MapCertificates(app);
 institutionRoutes.MapAdmissionFinance(app);
 institutionRoutes.MapFaculty(app);
 institutionRoutes.MapAcademics(app);

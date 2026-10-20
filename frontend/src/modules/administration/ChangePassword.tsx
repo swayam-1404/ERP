@@ -1,0 +1,7 @@
+import {useState} from 'react';
+import {api} from '../../services/api';
+import {Button} from '../../components/ui/button';
+export function ChangePassword(){
+ const [error,setError]=useState(''),[busy,setBusy]=useState(false);
+ return <main className="login-form"><p className="eyebrow">ACCOUNT SETUP</p><h1>Choose your own password.</h1><p>Replace the temporary password before opening your records.</p><form onSubmit={async e=>{e.preventDefault();const f=new FormData(e.currentTarget);setError('');if(f.get('newPassword')!==f.get('confirmation')){setError('New passwords must match.');return}setBusy(true);try{await api('/auth/password/change',{method:'POST',body:JSON.stringify({currentPassword:f.get('currentPassword'),newPassword:f.get('newPassword')})});window.location.assign('/')}catch(e){setError((e as Error).message)}finally{setBusy(false)}}}><label>Temporary password<input name="currentPassword" type="password" required autoComplete="current-password" maxLength={128}/></label><label>New password<input name="newPassword" type="password" required autoComplete="new-password" minLength={12} maxLength={128}/></label><label>Confirm new password<input name="confirmation" type="password" required autoComplete="new-password" minLength={12} maxLength={128}/></label>{error&&<p role="alert" className="error">{error}</p>}<Button disabled={busy}>{busy?'Updating…':'Change password and sign in again'}</Button></form></main>;
+}

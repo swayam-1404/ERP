@@ -1,4 +1,4 @@
-# Progress — 2026-10-17
+# Progress — 2026-10-20
 
 ## Current state
 
@@ -10,22 +10,23 @@ Working local institutional/student/teaching core with admissions intake and ind
 | 1 | Local foundation validated; container check pending | .NET/React build, real PostgreSQL, migrations, live health/UI; Docker daemon unavailable |
 | 2 | Core increment validated; broader phase partial | Identity, MFA, policy scope, references, department create/audit; campus/semester/roles/approval/notices remain |
 | 3 | Student/faculty and admissions increments; broader phase partial | Student/guardian/enrollment maintenance, faculty maintenance, 500 DEMO students; intake/evidence review, independently approved fee plans/payment verification/final approval and atomic enrollment conversion. Official eligibility/seat allocation, secure documents and broader lifecycle remain |
-| 4 | Teaching/attendance and weekly-series increments validated; broader phase partial | Dated and weekly schedule, explicit skip dates, conflict previews/atomic saves, future cancellation, date filters, saved rosters, attendance, separate correction review and reports; practical/template editing/shortage/student-guardian features remain |
-| 5 | Not started | Exams/results and approved grading policies |
+| 4 | Teaching/attendance and weekly-series increments validated; broader phase partial | Dated and weekly schedule, explicit skip dates, conflict previews/atomic saves, future cancellation, date filters, saved rosters, attendance, separate correction review and reports; student/guardian visibility now implemented; practical/template editing/shortage remain |
+| 5 | Core exam/result increment implemented; broader phase partial | Source-backed independently approved grading policies, saved assessment rosters, assigned marks entry/submission, independent result approval/publication, recorded SGPA/CGPA and portal results. Practical-specific exams, registrations, moderation/revaluation and retakes remain |
 | 6 | Admission finance increment validated; broader phase partial | Approved year-matched admission charge plans, payment evidence/idempotency/independent verification, acknowledgements/dues and enrollment gate. General ledger, refunds, other fee categories and live integrations remain |
-| 7–12 | Not started | Certificates, additional modules, Flutter, integrated/load/restore tests, deployment and handover |
+| 7 | Document/eligibility increment implemented; broader phase partial | Explicit approved curricula, published pass/credit checks, manual clearance evidence, independently issued immutable transcript/course completion PDFs, hashes, QR verification and revocation. Official templates/signatures, semester marksheets and bulk/reissue/alumni workflows remain |
+| 8–12 | Not completed | Additional modules, Flutter, full integrated/load/restore tests, deployment and handover |
 
 ## Current increment report
 
-Completed and integrated features: listed in README and API guides. Files changed: backend domain/context/reference and demo seed/8 EF migrations/API/security/tests; frontend app/services/components/styles/student/faculty/admissions/finance/attendance/account-security/dashboard/browser tests; infrastructure Docker/Nginx/Compose, .github CI, environment/run scripts and documentation. See docs/testing/PHASE_1.md and PHASE_2_CORE.md for earlier validated checkpoints.
+Completed and integrated features: listed in README and API guides. Files changed: backend domain/context/reference and demo seed/11 EF migrations/API/security/tests; frontend app/services/components/styles/student/faculty/admissions/finance/attendance/account-security/dashboard/browser tests; infrastructure Docker/Nginx/Compose, .github CI, environment/run scripts and documentation. See docs/testing/PHASE_1.md and PHASE_2_CORE.md for earlier validated checkpoints.
 
-Database changes: InitialCore, InstitutionCore, StudentFacultyCore, TimetableAttendance, AdmissionIntake, RecurringTimetable, AdmissionFinanceConversion and AdmissionCollectionMode migrations; institution/Identity, department/programme/session/assignment/audit, student/guardian/enrollment/faculty plus admissions/finance/teaching/attendance/correction/weekly-series tables. Composite institution FKs and optimistic version checks. Seeds: source-backed references, explicit demo sessions and fictional accounts; deterministic seed 20261014 produces 500 students/guardians/enrollments and 32 faculty. Browser verification adds labelled demo records; no official monetary values seeded.
+Database changes: InitialCore, InstitutionCore, StudentFacultyCore, TimetableAttendance, AdmissionIntake, RecurringTimetable, AdmissionFinanceConversion, AdmissionCollectionMode, StudentGuardianPortal, ExaminationsResults and AcademicCertificates migrations; institution/Identity, department/programme/session/assignment/audit, student/guardian/enrollment/faculty plus admissions/finance/teaching/attendance/correction/weekly-series tables. Composite institution FKs and optimistic version checks. Seeds: source-backed references, explicit demo sessions and fictional accounts; deterministic seed 20261014 produces 500 students/guardians/enrollments and 32 faculty. Browser verification adds labelled demo records; no official monetary values seeded.
 
-Tests executed: backend build (0 warnings/errors), 55 real-PostgreSQL integration/security checks, React build, 13 Playwright browser checks; desktop/mobile screenshots inspected; Compose development config parsed. Final test failures: none. Earlier failures and fixes are recorded in TEST_RESULTS.md. CI workflow authored; remote result not verified.
+Tests executed: backend build (0 warnings/errors), 78 real-PostgreSQL integration/security checks, React build, 16 Playwright browser checks; desktop/mobile screenshots inspected; Compose development config parsed. Final test failures: none. Earlier failures and fixes are recorded in TEST_RESULTS.md. CI workflow authored; remote result not verified.
 
 Known issues: broader phases incomplete, official rules/fees/authority unconfigured, Docker service startup untested, native bootstrap/reset not rehearsed on a clean second machine, full accessibility/performance/backups not measured.
 
-Remaining work and next step: complete remaining core/admissions, practical scheduling/template editing, official shortage rule configuration and student/guardian access before claiming full phase completion. Never mark mandatory certificate or finance features complete merely because their design exists.
+Remaining work and next step: complete remaining core/admissions, practical scheduling/template editing, official shortage rule configuration and remaining core administration before claiming full phase completion. Never mark mandatory certificate or finance features complete merely because their design exists.
 
 Git: feature/erp-core, repository swayam-1404/ERP only. Teaching/admissions and recurring timetable increments use draft PR #1. No merge or deployment performed.
 
@@ -40,3 +41,7 @@ Adds TimetableSeries and optional scoped class-series links. Weekly patterns mat
 ## Admission finance and conversion — 2026-10-17
 
 Fee-plan drafts require independent same-year approval before charging reviewed applications. Recorded external/offline payment evidence requires separate verification and cannot overpay or replay. Final authority approval and one-time student/guardian/enrollment conversion recheck full confirmation in a serialized transaction. Financial history survives cancellation; pending/paid cancellation is blocked pending refunds. VDC +3 requires external-portal plans and selection references based on official SAMS guidance. Historical VIT fee tables and conflicting disclosures are retained as research, not activated. See api/ADMISSION_FINANCE_API.md and research/FEE_SOURCE_REVIEW_2026-10-17.md. This advances phases 3/6, not all requested remaining phases.
+
+## Portals, examinations and academic documents — 2026-10-20
+
+Explicit student/guardian grants enforce verified relationship references and mandatory first password change. Saved roster/fee/attendance/results views expose only linked students; revocation takes effect immediately. Source-backed grading and component policies control complete marks entry, independent approval and publication. Document requests freeze student/published-result snapshots; separate issuance persists original PDF/hash/number and QR verification. Approved explicit curricula and clearance evidence gate course completion. See api/PORTAL_API.md, EXAMINATIONS_API.md, CERTIFICATES_API.md and testing/PORTALS_EXAMS_CERTIFICATES.md. No official grading policy, current fee schedule, signature or university authority has been fabricated. This advances phases 4/5/7 without declaring those broad phases complete.

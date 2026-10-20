@@ -6,6 +6,7 @@ namespace VHEI.Infrastructure;
 
 public class ErpUser : IdentityUser<Guid>
 {
+    public bool MustChangePassword { get; set; }
     public string DisplayName { get; set; } = "";
 }
 public class ErpDbContext(DbContextOptions<ErpDbContext> options) : IdentityDbContext<ErpUser, IdentityRole<Guid>, Guid>(options)
@@ -22,6 +23,12 @@ public class ErpDbContext(DbContextOptions<ErpDbContext> options) : IdentityDbCo
     public DbSet<Faculty> Faculty => Set<Faculty>();
     public DbSet<AdmissionApplication> AdmissionApplications => Set<AdmissionApplication>();
     public DbSet<AdmissionEvent> AdmissionEvents => Set<AdmissionEvent>();
+    public DbSet<PortalAccess> PortalAccesses => Set<PortalAccess>();
+    public DbSet<GradingPolicy> GradingPolicies => Set<GradingPolicy>();
+    public DbSet<ExamAssessment> ExamAssessments => Set<ExamAssessment>();
+    public DbSet<ExamMark> ExamMarks => Set<ExamMark>();
+    public DbSet<GraduationPolicy> GraduationPolicies => Set<GraduationPolicy>();
+    public DbSet<AcademicCertificate> AcademicCertificates => Set<AcademicCertificate>();
     public DbSet<AdmissionFeePlan> AdmissionFeePlans => Set<AdmissionFeePlan>();
     public DbSet<AdmissionCharge> AdmissionCharges => Set<AdmissionCharge>();
     public DbSet<AdmissionPayment> AdmissionPayments => Set<AdmissionPayment>();
@@ -35,6 +42,14 @@ public class ErpDbContext(DbContextOptions<ErpDbContext> options) : IdentityDbCo
     protected override void OnModelCreating(ModelBuilder model)
     {
         base.OnModelCreating(model);
+        ConfigureExaminations(model);
+        ConfigureCertificates(model);
+        ConfigureScoped<PortalAccess>(model);
+        model.Entity<PortalAccess>().HasIndex(x=>new{x.InstitutionId,x.UserId,x.StudentId,x.Kind}).IsUnique();
+        model.Entity<PortalAccess>().Property(x=>x.Version).IsConcurrencyToken();
+        model.Entity<PortalAccess>().HasOne<ErpUser>().WithMany().HasForeignKey(x=>x.UserId).OnDelete(DeleteBehavior.Restrict);
+        model.Entity<PortalAccess>().HasOne<Student>().WithMany().HasForeignKey(x=>new{x.InstitutionId,x.StudentId}).HasPrincipalKey(x=>new{x.InstitutionId,x.Id}).OnDelete(DeleteBehavior.Restrict);
+        model.Entity<PortalAccess>().ToTable(t=>t.HasCheckConstraint("CK_Portal_Kind","\"Kind\" IN ('Student','Guardian')"));
         ConfigureFinance(model);
         ConfigureScoped<TimetableSeries>(model);
         model.Entity<TimetableSeries>().Property(x=>x.Version).IsConcurrencyToken();
@@ -118,6 +133,47 @@ public class ErpDbContext(DbContextOptions<ErpDbContext> options) : IdentityDbCo
         model.Entity<AttendanceRecord>().ToTable(t=>t.HasCheckConstraint("CK_Attendance_Status","\"Status\" IN ('Present','Absent','Excused')"));
         model.Entity<AttendanceCorrection>().HasOne<AttendanceRecord>().WithMany().HasForeignKey(x=>new{x.InstitutionId,x.AttendanceRecordId}).HasPrincipalKey(x=>new{x.InstitutionId,x.Id}).OnDelete(DeleteBehavior.Restrict);
         model.Entity<AttendanceCorrection>().ToTable(t=>{t.HasCheckConstraint("CK_Correction_Status","\"Status\" IN ('Pending','Approved','Rejected')");t.HasCheckConstraint("CK_Correction_Separation","\"ReviewedBy\" IS NULL OR \"ReviewedBy\" <> \"RequestedBy\"");});
+    }
+    private static void ConfigureExaminations(ModelBuilder model)
+    {
+        ConfigureScoped<GradingPolicy>(model);ConfigureScoped<ExamAssessment>(model);ConfigureScoped<ExamMark>(model);
+        model.Entity<GradingPolicy>().Property(x=>x.Version).IsConcurrencyToken();
+        model.Entity<GradingPolicy>().HasOne<Programme>().WithMany().HasForeignKey(x=>new{x.InstitutionId,x.ProgrammeId}).HasPrincipalKey(x=>new{x.InstitutionId,x.Id}).OnDelete(DeleteBehavior.Restrict);
+        model.Entity<GradingPolicy>().HasOne<AcademicSession>().WithMany().HasForeignKey(x=>new{x.InstitutionId,x.AcademicSessionId}).HasPrincipalKey(x=>new{x.InstitutionId,x.Id}).OnDelete(DeleteBehavior.Restrict);
+        model.Entity<GradingPolicy>().ToTable(t=>t.HasCheckConstraint("CK_GradingPolicy_Approval","\"Status\" = 'Draft' OR (\"Status\" = 'Approved' AND \"ApprovedBy\" IS NOT NULL AND \"ApprovedBy\" <> \"CreatedBy\")"));
+        model.Entity<ExamAssessment>().Property(x=>x.Version).IsConcurrencyToken();
+        model.Entity<ExamAssessment>().HasOne<Subject>().WithMany().HasForeignKey(x=>new{x.InstitutionId,x.SubjectId}).HasPrincipalKey(x=>new{x.InstitutionId,x.Id}).OnDelete(DeleteBehavior.Restrict);
+        model.Entity<ExamAssessment>().HasOne<GradingPolicy>().WithMany().HasForeignKey(x=>new{x.InstitutionId,x.GradingPolicyId}).HasPrincipalKey(x=>new{x.InstitutionId,x.Id}).OnDelete(DeleteBehavior.Restrict);
+        model.Entity<ExamAssessment>().HasOne<Faculty>().WithMany().HasForeignKey(x=>new{x.InstitutionId,x.FacultyId}).HasPrincipalKey(x=>new{x.InstitutionId,x.Id}).OnDelete(DeleteBehavior.Restrict);
+        model.Entity<ExamAssessment>().HasAlternateKey(x=>new{x.InstitutionId,x.Id,x.SubjectId});
+        model.Entity<ExamAssessment>().HasIndex(x=>new{x.InstitutionId,x.SubjectId,x.Section}).IsUnique();
+        model.Entity<ExamAssessment>().ToTable(t=>{t.HasCheckConstraint("CK_Assessment_Status","\"Status\" IN ('Draft','Submitted','Approved','Published')");t.HasCheckConstraint("CK_Assessment_Approval","\"Status\" NOT IN ('Approved','Published') OR (\"ApprovedBy\" IS NOT NULL AND \"SubmittedBy\" IS NOT NULL AND \"ApprovedBy\" <> \"SubmittedBy\")");t.HasCheckConstraint("CK_Assessment_Limits","\"Credits\" > 0 AND \"MaximumInternal\" >= 0 AND \"MaximumExternal\" > 0 AND \"PassInternal\" BETWEEN 0 AND \"MaximumInternal\" AND \"PassExternal\" BETWEEN 0 AND \"MaximumExternal\" AND \"PassTotal\" BETWEEN 0 AND (\"MaximumInternal\" + \"MaximumExternal\")");});
+        foreach(var p in new[]{"Credits","MaximumInternal","MaximumExternal","PassInternal","PassExternal","PassTotal"})model.Entity<ExamAssessment>().Property<decimal>(p).HasPrecision(12,2);
+        foreach(var p in new[]{"InternalMark","ExternalMark","Total","Percentage","GradePoints"})model.Entity<ExamMark>().Property<decimal?>(p).HasPrecision(12,2);
+        model.Entity<ExamMark>().HasOne<ExamAssessment>().WithMany().HasForeignKey(x=>new{x.InstitutionId,x.AssessmentId,x.SubjectId}).HasPrincipalKey(x=>new{x.InstitutionId,x.Id,x.SubjectId}).OnDelete(DeleteBehavior.Restrict);
+        model.Entity<ExamMark>().HasOne<Enrollment>().WithMany().HasForeignKey(x=>new{x.InstitutionId,x.EnrollmentId,x.StudentId}).HasPrincipalKey(x=>new{x.InstitutionId,x.Id,x.StudentId}).OnDelete(DeleteBehavior.Restrict);
+        model.Entity<ExamMark>().HasIndex(x=>new{x.InstitutionId,x.AssessmentId,x.StudentId}).IsUnique();
+        model.Entity<ExamMark>().HasIndex(x=>new{x.InstitutionId,x.StudentId,x.SubjectId}).IsUnique().HasFilter("\"IsPublished\"");
+        model.Entity<ExamMark>().ToTable(t=>t.HasCheckConstraint("CK_ExamMark_Attendance","\"Attendance\" IN ('Unentered','Present','Absent')"));
+    }
+    private static void ConfigureCertificates(ModelBuilder model)
+    {
+        ConfigureScoped<GraduationPolicy>(model); ConfigureScoped<AcademicCertificate>(model);
+        model.Entity<GraduationPolicy>().Property(x=>x.Version).IsConcurrencyToken();
+        model.Entity<GraduationPolicy>().Property(x=>x.MinimumCredits).HasPrecision(12,2);
+        model.Entity<GraduationPolicy>().HasOne<Programme>().WithMany().HasForeignKey(x=>new{x.InstitutionId,x.ProgrammeId}).HasPrincipalKey(x=>new{x.InstitutionId,x.Id}).OnDelete(DeleteBehavior.Restrict);
+        model.Entity<GraduationPolicy>().HasOne<AcademicSession>().WithMany().HasForeignKey(x=>new{x.InstitutionId,x.AcademicSessionId}).HasPrincipalKey(x=>new{x.InstitutionId,x.Id}).OnDelete(DeleteBehavior.Restrict);
+        model.Entity<GraduationPolicy>().ToTable(t=>{t.HasCheckConstraint("CK_GraduationPolicy_Credits","\"MinimumCredits\" > 0");t.HasCheckConstraint("CK_GraduationPolicy_Approval","\"Status\" = 'Draft' OR (\"Status\" = 'Approved' AND \"ApprovedBy\" IS NOT NULL AND \"ApprovedBy\" <> \"CreatedBy\")");});
+        model.Entity<AcademicCertificate>().Property(x=>x.Version).IsConcurrencyToken();
+        model.Entity<AcademicCertificate>().HasOne<Student>().WithMany().HasForeignKey(x=>new{x.InstitutionId,x.StudentId}).HasPrincipalKey(x=>new{x.InstitutionId,x.Id}).OnDelete(DeleteBehavior.Restrict);
+        model.Entity<AcademicCertificate>().HasOne<GraduationPolicy>().WithMany().HasForeignKey(x=>new{x.InstitutionId,x.GraduationPolicyId}).HasPrincipalKey(x=>new{x.InstitutionId,x.Id}).OnDelete(DeleteBehavior.Restrict);
+        model.Entity<AcademicCertificate>().HasIndex(x=>x.VerificationToken).IsUnique().HasFilter("\"VerificationToken\" IS NOT NULL");
+        model.Entity<AcademicCertificate>().HasIndex(x=>x.Number).IsUnique().HasFilter("\"Number\" IS NOT NULL");
+        model.Entity<AcademicCertificate>().ToTable(t=>{
+            t.HasCheckConstraint("CK_Certificate_Kind","\"Kind\" IN ('Transcript','CourseCompletion') AND (\"Kind\" <> 'CourseCompletion' OR \"GraduationPolicyId\" IS NOT NULL)");
+            t.HasCheckConstraint("CK_Certificate_Issue","\"Status\" IN ('Requested','Cancelled') OR (\"Status\" IN ('Issued','Revoked') AND \"IssuedBy\" IS NOT NULL AND \"IssuedBy\" <> \"RequestedBy\" AND \"Pdf\" IS NOT NULL AND \"Number\" IS NOT NULL AND \"Sha256\" IS NOT NULL AND \"VerificationToken\" IS NOT NULL AND \"IssuedAt\" IS NOT NULL)");
+            t.HasCheckConstraint("CK_Certificate_Revoke","\"Status\" <> 'Revoked' OR (\"RevokedBy\" IS NOT NULL AND \"RevokedAt\" IS NOT NULL)");
+        });
     }
     private static void ConfigureFinance(ModelBuilder model)
     {

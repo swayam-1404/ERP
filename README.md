@@ -16,15 +16,18 @@ A running development increment in E:\ERP\VHEI-ERP using **ASP.NET Core 10, Post
 - 500 deterministic fictional students and 32 fictional faculty, clearly DEMO, using reserved example.test emails. Browser checks add further labelled demo records. No private student records imported.
 - Timetable periods with database-enforced room/faculty/cohort conflict detection, frozen class rosters, assigned faculty attendance, separate correction review and operational attendance reports.
 - Weekly series with IST date preview, selected weekdays/skipped dates, atomic conflict-safe creation, future-remainder cancellation and class date filtering. Saved attendance and rosters remain intact.
+- Student/guardian portals with evidence-backed access grants, mandatory temporary-password change, linked schedule/attendance/admission fees, published results and immediate revocation.
+- Examinations with approved source-backed grading policies, frozen rosters, assigned marks entry, independent approval/publication, recorded SGPA/CGPA and backlog visibility.
+- Academic document requests with approved curriculum/credit checks, manual clearance references, separate issuance, immutable transcript/course-completion PDFs, public QR/file verification and revocation. Production issuance is disabled by default; official templates/signatures remain pending.
 - EF migrations, local start/stop scripts, pinned dependency lock, CI and Docker/Nginx preparation.
 
 ## Validation
 
-Backend build passed with no warnings/errors; 55 PostgreSQL integration/security tests and 13 Playwright browser checks passed; frontend production build passed. Coverage includes admissions, single/weekly scheduling, attendance and mobile page-width checks. Desktop/mobile screenshots were inspected. See [test results](docs/TEST_RESULTS.md). Docker service startup and production deployment were not verified.
+Backend build passed with no warnings/errors; 78 PostgreSQL integration/security tests and 16 browser tests passed; frontend production build passed. Coverage includes admissions, single/weekly scheduling, attendance and mobile page-width checks. Desktop/mobile screenshots were inspected. See [test results](docs/TEST_RESULTS.md). Docker service startup and production deployment were not verified.
 
 ## Still to build
 
-Remaining core/role administration; official admissions eligibility/seat allocation and secure documents; refunds/withdrawals; production faculty-account provisioning; subject registrations/scholarships; remaining timetable/attendance features; examinations/results; full finance beyond the admission subledger; marksheets/certificates; additional ERP modules; Flutter mobile; performance/restore testing; reviewed Hostinger staging/production deployment. Historical published fees are documented with academic years and conflicts, not automatically activated. Missing modules have no fake success screens.
+Remaining core/role administration; official admissions eligibility/seat allocation and secure documents; refunds/withdrawals; production faculty-account provisioning; subject registrations/scholarships; remaining timetable/attendance features; remaining examinations/retakes/moderation; full finance beyond the admission subledger; remaining marksheets/official certificates/signatures; additional ERP modules; Flutter mobile; performance/restore testing; reviewed Hostinger staging/production deployment. Historical published fees are documented with academic years and conflicts, not automatically activated. Missing modules have no fake success screens.
 
 ## Conflict resolutions and evidence
 
