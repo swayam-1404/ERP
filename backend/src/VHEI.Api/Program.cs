@@ -23,9 +23,10 @@ builder.Services.AddAntiforgery(o=>{o.HeaderName="X-CSRF-TOKEN";o.Cookie.Name="v
 builder.Services.AddAuthorization(options=>{
     options.AddPolicy("Workspace",policy=>{policy.RequireAuthenticatedUser();policy.RequireAssertion(c=>appIsDev()||!c.User.IsInRole("CentralAdministrator")&&!c.User.IsInRole("InstitutionAdministrator")||c.User.HasClaim("amr","mfa"));});
     options.AddPolicy("Manage",policy=>{policy.RequireRole("CentralAdministrator","InstitutionAdministrator");policy.RequireAssertion(c=>appIsDev()||c.User.HasClaim("amr","mfa"));});
+    options.AddPolicy("Teaching",policy=>policy.RequireRole("CentralAdministrator","InstitutionAdministrator","Faculty"));
 });
 bool appIsDev()=>builder.Environment.IsDevelopment();
-builder.Services.AddRateLimiter(options=>{options.RejectionStatusCode=429;options.AddPolicy("login",ctx=>RateLimitPartition.GetFixedWindowLimiter(ctx.Connection.RemoteIpAddress?.ToString()??"unknown",_=>new FixedWindowRateLimiterOptions{PermitLimit=Math.Clamp(builder.Configuration.GetValue<int?>("RateLimiting:LoginPermitLimit")??10,1,50),Window=TimeSpan.FromMinutes(1),QueueLimit=0}));});
+builder.Services.AddRateLimiter(options=>{options.RejectionStatusCode=429;options.AddPolicy("verification",ctx=>RateLimitPartition.GetFixedWindowLimiter(ctx.Connection.RemoteIpAddress?.ToString()??"unknown",_=>new FixedWindowRateLimiterOptions{PermitLimit=30,Window=TimeSpan.FromMinutes(1),QueueLimit=0}));options.AddPolicy("login",ctx=>RateLimitPartition.GetFixedWindowLimiter(ctx.Connection.RemoteIpAddress?.ToString()??"unknown",_=>new FixedWindowRateLimiterOptions{PermitLimit=Math.Clamp(builder.Configuration.GetValue<int?>("RateLimiting:LoginPermitLimit")??10,1,50),Window=TimeSpan.FromMinutes(1),QueueLimit=0}));});
 var app = builder.Build();
 app.UseExceptionHandler();
 app.UseSerilogRequestLogging();
@@ -33,6 +34,7 @@ app.UseRateLimiter();
 app.UseAuthentication();
 app.UseAuthorization();
 app.Use(async(ctx,next)=>{
+    if(ctx.Request.Path.StartsWithSegments("/api")&&ctx.Request.Path.Value?.Contains("/certificates")==true)ctx.Response.Headers.CacheControl="no-store";
     if(ctx.Request.Path.StartsWithSegments("/api")&&ctx.Request.Method is not ("GET" or "HEAD" or "OPTIONS"))
     {
         try {await ctx.RequestServices.GetRequiredService<IAntiforgery>().ValidateRequestAsync(ctx);} catch(AntiforgeryValidationException){await Results.Problem("Antiforgery token is missing or invalid.",statusCode:400).ExecuteAsync(ctx);return;}
@@ -48,11 +50,20 @@ if(seedMode is "Demo" or "Reference")
     await db.Database.MigrateAsync();
     await ReferenceSeed.RunAsync(db,Path.Combine(AppContext.BaseDirectory,"reference-data.json"),seedMode=="Demo",scope.ServiceProvider.GetRequiredService<UserManager<ErpUser>>(),scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>(),builder.Configuration["Seed:AdminPassword"]);
     if(seedMode=="Demo")await DemoSeed.RunAsync(db);
+    if(seedMode=="Demo")await AcademicDemoSeed.RunAsync(db);
+    if(seedMode=="Demo")await PortalDemoSeed.RunAsync(db);
 }
 app.MapAuth();
 var institutionRoutes=app.MapCore();
 institutionRoutes.MapStudents(app);
+institutionRoutes.MapAdmissions(app);
+institutionRoutes.MapPortal(app);
+institutionRoutes.MapExaminations(app);
+institutionRoutes.MapCertificates(app);
+institutionRoutes.MapAdmissionFinance(app);
 institutionRoutes.MapFaculty(app);
+institutionRoutes.MapAcademics(app);
+institutionRoutes.MapRecurringTimetable(app);
 app.MapGet("/api/v1/overview",async(HttpContext ctx,ErpDbContext db)=>{
     var assigned=await db.InstitutionAssignments.Where(x=>x.UserId==ctx.Actor()).Select(x=>x.InstitutionId).ToListAsync();
     return Results.Ok(new{students=await db.Students.CountAsync(x=>assigned.Contains(x.InstitutionId)&&x.Status!="Archived"),institutions=assigned.Count,faculty=await db.Faculty.CountAsync(x=>assigned.Contains(x.InstitutionId)&&!x.IsArchived),byInstitution=await db.Institutions.Where(x=>assigned.Contains(x.Id)).OrderBy(x=>x.Code).Select(x=>new{name=x.Code,students=db.Students.Count(s=>s.InstitutionId==x.Id&&s.Status!="Archived")}).ToListAsync()});

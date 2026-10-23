@@ -1,2 +1,2 @@
 import {defineConfig} from '@playwright/test';
-export default defineConfig({testDir:'./tests',use:{channel:'chromium',baseURL:'http://127.0.0.1:5173',trace:'retain-on-failure'},reporter:'list',workers:1});
+export default defineConfig({testDir:'./tests',timeout:60000,expect:{timeout:10000},use:{channel:'chromium',baseURL:'http://127.0.0.1:5173',trace:'retain-on-failure'},reporter:'list',workers:1});

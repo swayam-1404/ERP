@@ -24,5 +24,5 @@ dotnet build backend/VHEI.slnx
 if ($LASTEXITCODE -ne 0) { throw 'Backend build failed.' }
 Push-Location frontend
 try { npm ci; if($LASTEXITCODE -ne 0){throw 'Frontend install failed.'}; npm run build; if($LASTEXITCODE -ne 0){throw 'Frontend build failed.'} } finally { Pop-Location }
-@('# Local development access','', 'URL: http://127.0.0.1:5173','', 'Central administrator: admin@example.test','Institution administrator: institution@example.test','Faculty: faculty@example.test','', "Password: $env:Seed__AdminPassword",'', 'Synthetic local Development only. Do not reuse these credentials.') | Set-Content -LiteralPath '.local\access.md' -Encoding utf8
+@('# Local development access','', 'URL: http://127.0.0.1:5173','', 'Central administrator: admin@example.test','Institution administrator: institution@example.test','Faculty: faculty@example.test','Student: student@example.test','Guardian: guardian@example.test','', "Password: $env:Seed__AdminPassword",'', 'Synthetic local Development only. Do not reuse these credentials.') | Set-Content -LiteralPath '.local\access.md' -Encoding utf8
 Write-Host 'Initialized. Run scripts/Start-Development.ps1. Credentials saved in .local/access.md.'

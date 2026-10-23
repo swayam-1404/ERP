@@ -6,6 +6,7 @@ namespace VHEI.Api;
 
 public record LoginRequest(string Email, string Password, string? Code);
 public record MfaRequest(string Code);
+public record PasswordChangeRequest(string CurrentPassword,string NewPassword);
 public static class AuthEndpoints
 {
     public static void MapAuth(this WebApplication app)
@@ -36,8 +37,15 @@ public static class AuthEndpoints
             if (user == null) return Results.Unauthorized();
             var roles=await users.GetRolesAsync(user);
             var institutions=await (from assignment in db.InstitutionAssignments join institution in db.Institutions on assignment.InstitutionId equals institution.Id where assignment.UserId==user.Id orderby institution.Code select new { institution.Id,institution.Code,institution.Name }).ToListAsync();
-            return Results.Ok(new { user.Id,user.Email,user.DisplayName,roles,institutions,mfaEnabled=user.TwoFactorEnabled });
+            return Results.Ok(new { user.Id,user.Email,user.DisplayName,roles,institutions,mfaEnabled=user.TwoFactorEnabled,user.MustChangePassword });
         }).RequireAuthorization();
+        auth.MapPost("/password/change",async(PasswordChangeRequest r,HttpContext ctx,UserManager<ErpUser> users,SignInManager<ErpUser> signIn)=>
+        {
+            if(string.IsNullOrEmpty(r.CurrentPassword)||r.CurrentPassword.Length>128||string.IsNullOrEmpty(r.NewPassword)||r.NewPassword.Length is <12 or >128||r.NewPassword==r.CurrentPassword)return Results.Problem("Provide the current password and a different new password of 12–128 characters.",statusCode:400);
+            var user=await users.GetUserAsync(ctx.User);if(user==null)return Results.Unauthorized();
+            var result=await users.ChangePasswordAsync(user,r.CurrentPassword,r.NewPassword);if(!result.Succeeded)return Results.Problem("Password change rejected. Check the current password and use a strong new password.",statusCode:400);
+            user.MustChangePassword=false;await users.UpdateAsync(user);await signIn.SignOutAsync();return Results.Ok(new{signInAgain=true});
+        }).RequireAuthorization().RequireRateLimiting("login");
         auth.MapGet("/mfa/setup", async(HttpContext ctx, UserManager<ErpUser> users) =>
         {
             var user=(await users.GetUserAsync(ctx.User))!;

@@ -20,7 +20,7 @@ public class CoreFixture : IAsyncLifetime
     public async Task InitializeAsync()
     {
         var config=new NpgsqlConnectionStringBuilder(Environment.GetEnvironmentVariable("TEST_DATABASE")??throw new InvalidOperationException("TEST_DATABASE is required. Tests use isolated PostgreSQL."));
-        database="vhei_integration_test_"+Guid.NewGuid().ToString("N");config.Database=database;
+        database="vhei_integration_test_"+Guid.NewGuid().ToString("N");config.Database=database;config.CommandTimeout=120;
         App=new WebApplicationFactory<Program>().WithWebHostBuilder(b=>b.UseEnvironment("Development").ConfigureAppConfiguration((_,c)=>c.AddInMemoryCollection(new Dictionary<string,string?>{["ConnectionStrings:Erp"]=config.ConnectionString,["Seed:Mode"]="Demo",["Seed:AdminPassword"]=Password,["RateLimiting:LoginPermitLimit"]="50"})));
         using var startup=App.CreateClient();using var scope=App.Services.CreateScope();var db=scope.ServiceProvider.GetRequiredService<ErpDbContext>();
         Vit=await db.Institutions.Where(x=>x.Code=="VIT").Select(x=>x.Id).SingleAsync();Vdc=await db.Institutions.Where(x=>x.Code=="VDC").Select(x=>x.Id).SingleAsync();
